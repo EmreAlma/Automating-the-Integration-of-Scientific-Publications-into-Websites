@@ -11,13 +11,29 @@ import java.net.http.HttpResponse;
 @Service
 public class FirstService {
 
-    public String getAuthor(String param){
+    public String getTestData(String param){
         HttpClient httpClient = HttpClient.newBuilder()
                 .build();
         try {
             HttpRequest request = HttpRequest.newBuilder()
                     .GET()
                     .uri(URI.create("https://dblp.org/search/publ/api?q=test&format="+param))
+                    .build();
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            return response.body();
+
+        }catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return  "";
+    }
+    public String getAuthor(String param){
+        HttpClient httpClient = HttpClient.newBuilder()
+                .build();
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .GET()
+                    .uri(URI.create("https://dblp.org/search/publ/api?q="+param))
                     .build();
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
             return response.body();
