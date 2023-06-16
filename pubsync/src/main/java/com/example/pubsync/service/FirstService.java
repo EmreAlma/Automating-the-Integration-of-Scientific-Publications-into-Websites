@@ -1,5 +1,6 @@
 package com.example.pubsync.service;
 
+import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -12,6 +13,7 @@ import java.net.http.HttpResponse;
 public class FirstService {
 
     public String getTestData(String param){
+        Gson gson = new Gson();
         HttpClient httpClient = HttpClient.newBuilder()
                 .build();
         try {
@@ -20,6 +22,7 @@ public class FirstService {
                     .uri(URI.create("https://dblp.org/search/publ/api?q=test&format="+param))
                     .build();
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            var testObject = gson.fromJson(response.body(), FirstService.class);
             return response.body();
 
         }catch (IOException | InterruptedException e) {
