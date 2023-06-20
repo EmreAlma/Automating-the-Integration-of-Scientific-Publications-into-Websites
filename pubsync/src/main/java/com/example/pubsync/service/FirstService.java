@@ -1,5 +1,6 @@
 package com.example.pubsync.service;
 
+import com.example.pubsync.model.Response;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
 
@@ -31,14 +32,16 @@ public class FirstService {
         return  "";
     }
     public String getAuthor(String param){
+        Gson gson = new Gson();
         HttpClient httpClient = HttpClient.newBuilder()
                 .build();
         try {
             HttpRequest request = HttpRequest.newBuilder()
                     .GET()
-                    .uri(URI.create("https://dblp.org/search/publ/api?q="+param))
+                    .uri(URI.create("https://dblp.org/search/publ/api?q="+param+"&format=json"))
                     .build();
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            Response responseBody = gson.fromJson(response.body(), Response.class);
             return response.body();
 
         }catch (IOException | InterruptedException e) {

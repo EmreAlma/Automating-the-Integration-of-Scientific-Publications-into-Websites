@@ -17,99 +17,13 @@ public class Response{
 		return result;
 	}
 
-	public static class Authors{
-
-		@SerializedName("author")
-		private List<AuthorItem> author;
-
-		public void setAuthor(List<AuthorItem> author){
-			this.author = author;
-		}
-
-		public List<AuthorItem> getAuthor(){
-			return author;
-		}
-	}
-
-	public static class HitItem{
-
-		@SerializedName("@score")
-		private String score;
-
-		@SerializedName("@id")
-		private String id;
-
-		@SerializedName("url")
-		private String url;
-
-		@SerializedName("info")
-		private Info info;
-
-		public void setScore(String score){
-			this.score = score;
-		}
-
-		public String getScore(){
-			return score;
-		}
-
-		public void setId(String id){
-			this.id = id;
-		}
-
-		public String getId(){
-			return id;
-		}
-
-		public void setUrl(String url){
-			this.url = url;
-		}
-
-		public String getUrl(){
-			return url;
-		}
-
-		public void setInfo(Info info){
-			this.info = info;
-		}
-
-		public Info getInfo(){
-			return info;
-		}
-	}
-
-	public static class Status{
-
-		@SerializedName("@code")
-		private String code;
-
-		@SerializedName("text")
-		private String text;
-
-		public void setCode(String code){
-			this.code = code;
-		}
-
-		public String getCode(){
-			return code;
-		}
-
-		public void setText(String text){
-			this.text = text;
-		}
-
-		public String getText(){
-			return text;
-		}
-	}
-
 	public static class Completions{
 
 		@SerializedName("@sent")
 		private String sent;
 
 		@SerializedName("c")
-		private List<CItem> c;
+		private C c;
 
 		@SerializedName("@computed")
 		private String computed;
@@ -125,11 +39,11 @@ public class Response{
 			return sent;
 		}
 
-		public void setC(List<CItem> c){
+		public void setC(C c){
 			this.c = c;
 		}
 
-		public List<CItem> getC(){
+		public C getC(){
 			return c;
 		}
 
@@ -150,244 +64,20 @@ public class Response{
 		}
 	}
 
-	public static class Hits{
+	public static class Status{
 
-		@SerializedName("hit")
-		private List<HitItem> hit;
-
-		@SerializedName("@sent")
-		private String sent;
-
-		@SerializedName("@first")
-		private String first;
-
-		@SerializedName("@computed")
-		private String computed;
-
-		@SerializedName("@total")
-		private String total;
-
-		public void setHit(List<HitItem> hit){
-			this.hit = hit;
-		}
-
-		public List<HitItem> getHit(){
-			return hit;
-		}
-
-		public void setSent(String sent){
-			this.sent = sent;
-		}
-
-		public String getSent(){
-			return sent;
-		}
-
-		public void setFirst(String first){
-			this.first = first;
-		}
-
-		public String getFirst(){
-			return first;
-		}
-
-		public void setComputed(String computed){
-			this.computed = computed;
-		}
-
-		public String getComputed(){
-			return computed;
-		}
-
-		public void setTotal(String total){
-			this.total = total;
-		}
-
-		public String getTotal(){
-			return total;
-		}
-	}
-
-	public static class Result{
-
-		@SerializedName("hits")
-		private Response.Hits hits;
-
-		@SerializedName("query")
-		private String query;
-
-		@SerializedName("completions")
-		private Response.Completions completions;
-
-		@SerializedName("time")
-		private Time time;
-
-		@SerializedName("status")
-		private Response.Status status;
-
-		public void setHits(Hits hits){
-			this.hits = hits;
-		}
-
-		public Hits getHits(){
-			return hits;
-		}
-
-		public void setQuery(String query){
-			this.query = query;
-		}
-
-		public String getQuery(){
-			return query;
-		}
-
-		public void setCompletions(Completions completions){
-			this.completions = completions;
-		}
-
-		public Completions getCompletions(){
-			return completions;
-		}
-
-		public void setTime(Time time){
-			this.time = time;
-		}
-
-		public Time getTime(){
-			return time;
-		}
-
-		public void setStatus(Status status){
-			this.status = status;
-		}
-
-		public Status getStatus(){
-			return status;
-		}
-	}
-
-	public static class AuthorItem{
-
-		@SerializedName("@pid")
-		private String pid;
+		@SerializedName("@code")
+		private String code;
 
 		@SerializedName("text")
 		private String text;
 
-		public void setPid(String pid){
-			this.pid = pid;
+		public void setCode(String code){
+			this.code = code;
 		}
 
-		public String getPid(){
-			return pid;
-		}
-
-		public void setText(String text){
-			this.text = text;
-		}
-
-		public String getText(){
-			return text;
-		}
-	}
-
-	public static class Author{
-
-		@SerializedName("@pid")
-		private String pid;
-
-		@SerializedName("text")
-		private String text;
-
-		public void setPid(String pid){
-			this.pid = pid;
-		}
-
-		public String getPid(){
-			return pid;
-		}
-
-		public void setText(String text){
-			this.text = text;
-		}
-
-		public String getText(){
-			return text;
-		}
-	}
-
-	public static class CItem{
-
-		@SerializedName("@sc")
-		private String sc;
-
-		@SerializedName("@oc")
-		private String oc;
-
-		@SerializedName("@id")
-		private String id;
-
-		@SerializedName("text")
-		private String text;
-
-		@SerializedName("@dc")
-		private String dc;
-
-		public void setSc(String sc){
-			this.sc = sc;
-		}
-
-		public String getSc(){
-			return sc;
-		}
-
-		public void setOc(String oc){
-			this.oc = oc;
-		}
-
-		public String getOc(){
-			return oc;
-		}
-
-		public void setId(String id){
-			this.id = id;
-		}
-
-		public String getId(){
-			return id;
-		}
-
-		public void setText(String text){
-			this.text = text;
-		}
-
-		public String getText(){
-			return text;
-		}
-
-		public void setDc(String dc){
-			this.dc = dc;
-		}
-
-		public String getDc(){
-			return dc;
-		}
-	}
-
-	public static class Time{
-
-		@SerializedName("@unit")
-		private String unit;
-
-		@SerializedName("text")
-		private String text;
-
-		public void setUnit(String unit){
-			this.unit = unit;
-		}
-
-		public String getUnit(){
-			return unit;
+		public String getCode(){
+			return code;
 		}
 
 		public void setText(String text){
@@ -435,13 +125,10 @@ public class Response{
 		private String key;
 
 		@SerializedName("authors")
-		private Response.Authors authors;
+		private Authors authors;
 
 		@SerializedName("doi")
 		private String doi;
-
-		@SerializedName("publisher")
-		private String publisher;
 
 		public void setEe(String ee){
 			this.ee = ee;
@@ -546,13 +233,290 @@ public class Response{
 		public String getDoi(){
 			return doi;
 		}
+	}
 
-		public void setPublisher(String publisher){
-			this.publisher = publisher;
+	public static class HitItem{
+
+		@SerializedName("@score")
+		private String score;
+
+		@SerializedName("@id")
+		private String id;
+
+		@SerializedName("url")
+		private String url;
+
+		@SerializedName("info")
+		private Info info;
+
+		public void setScore(String score){
+			this.score = score;
 		}
 
-		public String getPublisher(){
-			return publisher;
+		public String getScore(){
+			return score;
+		}
+
+		public void setId(String id){
+			this.id = id;
+		}
+
+		public String getId(){
+			return id;
+		}
+
+		public void setUrl(String url){
+			this.url = url;
+		}
+
+		public String getUrl(){
+			return url;
+		}
+
+		public void setInfo(Info info){
+			this.info = info;
+		}
+
+		public Info getInfo(){
+			return info;
+		}
+	}
+
+	public static class AuthorItem{
+
+		@SerializedName("@pid")
+		private String pid;
+
+		@SerializedName("text")
+		private String text;
+
+		public void setPid(String pid){
+			this.pid = pid;
+		}
+
+		public String getPid(){
+			return pid;
+		}
+
+		public void setText(String text){
+			this.text = text;
+		}
+
+		public String getText(){
+			return text;
+		}
+	}
+
+	public static class Time{
+
+		@SerializedName("@unit")
+		private String unit;
+
+		@SerializedName("text")
+		private String text;
+
+		public void setUnit(String unit){
+			this.unit = unit;
+		}
+
+		public String getUnit(){
+			return unit;
+		}
+
+		public void setText(String text){
+			this.text = text;
+		}
+
+		public String getText(){
+			return text;
+		}
+	}
+
+	public static class Result{
+
+		@SerializedName("hits")
+		private Hits hits;
+
+		@SerializedName("query")
+		private String query;
+
+		@SerializedName("completions")
+		private Completions completions;
+
+		@SerializedName("time")
+		private Time time;
+
+		@SerializedName("status")
+		private Status status;
+
+		public void setHits(Hits hits){
+			this.hits = hits;
+		}
+
+		public Hits getHits(){
+			return hits;
+		}
+
+		public void setQuery(String query){
+			this.query = query;
+		}
+
+		public String getQuery(){
+			return query;
+		}
+
+		public void setCompletions(Completions completions){
+			this.completions = completions;
+		}
+
+		public Completions getCompletions(){
+			return completions;
+		}
+
+		public void setTime(Time time){
+			this.time = time;
+		}
+
+		public Time getTime(){
+			return time;
+		}
+
+		public void setStatus(Status status){
+			this.status = status;
+		}
+
+		public Status getStatus(){
+			return status;
+		}
+	}
+
+	public static class Hits{
+
+		@SerializedName("hit")
+		private List<HitItem> hit;
+
+		@SerializedName("@sent")
+		private String sent;
+
+		@SerializedName("@first")
+		private String first;
+
+		@SerializedName("@computed")
+		private String computed;
+
+		@SerializedName("@total")
+		private String total;
+
+		public void setHit(List<HitItem> hit){
+			this.hit = hit;
+		}
+
+		public List<HitItem> getHit(){
+			return hit;
+		}
+
+		public void setSent(String sent){
+			this.sent = sent;
+		}
+
+		public String getSent(){
+			return sent;
+		}
+
+		public void setFirst(String first){
+			this.first = first;
+		}
+
+		public String getFirst(){
+			return first;
+		}
+
+		public void setComputed(String computed){
+			this.computed = computed;
+		}
+
+		public String getComputed(){
+			return computed;
+		}
+
+		public void setTotal(String total){
+			this.total = total;
+		}
+
+		public String getTotal(){
+			return total;
+		}
+	}
+
+	public static class Authors{
+
+		@SerializedName("author")
+		private List<AuthorItem> author;
+
+		public void setAuthor(List<AuthorItem> author){
+			this.author = author;
+		}
+
+		public List<AuthorItem> getAuthor(){
+			return author;
+		}
+	}
+
+	public static class C{
+
+		@SerializedName("@sc")
+		private String sc;
+
+		@SerializedName("@oc")
+		private String oc;
+
+		@SerializedName("@id")
+		private String id;
+
+		@SerializedName("text")
+		private String text;
+
+		@SerializedName("@dc")
+		private String dc;
+
+		public void setSc(String sc){
+			this.sc = sc;
+		}
+
+		public String getSc(){
+			return sc;
+		}
+
+		public void setOc(String oc){
+			this.oc = oc;
+		}
+
+		public String getOc(){
+			return oc;
+		}
+
+		public void setId(String id){
+			this.id = id;
+		}
+
+		public String getId(){
+			return id;
+		}
+
+		public void setText(String text){
+			this.text = text;
+		}
+
+		public String getText(){
+			return text;
+		}
+
+		public void setDc(String dc){
+			this.dc = dc;
+		}
+
+		public String getDc(){
+			return dc;
 		}
 	}
 }
