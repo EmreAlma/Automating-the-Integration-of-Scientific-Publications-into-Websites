@@ -31,14 +31,14 @@ public class FirstService {
         }
         return  "";
     }
-    public String getAuthor(String param){
+    public String getAuthor(String param, String year){
         Gson gson = new Gson();
         HttpClient httpClient = HttpClient.newBuilder()
                 .build();
         try {
             HttpRequest request = HttpRequest.newBuilder()
                     .GET()
-                    .uri(URI.create("https://dblp.org/search/publ/api?q="+param+"&format=json"))
+                    .uri(URI.create("https://dblp.org/search/publ/api?q="+param+"$+"+year+"&format=json"))
                     .build();
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
             Response responseBody = gson.fromJson(response.body(), Response.class);

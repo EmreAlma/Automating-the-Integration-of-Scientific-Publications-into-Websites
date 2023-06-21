@@ -17,7 +17,8 @@ public class Controller {
         return firstService.getTestData(param);
     }
     @GetMapping("/author")
-    public String getAuthor(@RequestParam(value = "author", required = false) String param){
-        return firstService.getAuthor(param);
+    public String getAuthor(@RequestParam(value = "author", required = false) String param,
+                            @RequestParam(value = "year", required = false) String year){
+        return firstService.getAuthor(param, year);
     }
 }
