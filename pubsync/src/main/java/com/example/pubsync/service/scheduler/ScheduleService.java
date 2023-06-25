@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ScheduleService {
 
-    @Scheduled(initialDelay = 2000, fixedRate = 3000)
+    @Scheduled(initialDelay = 200000, fixedRate = 30000)
     public void doTask() {
         System.out.println("It works");
     }
