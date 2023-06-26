@@ -9,4 +9,15 @@ public class Authors {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
+
+    public void setName(String s) {
+    }
+    public void setLastName(String s) {
+    }
+
+    public void setActive(boolean b) {
+    }
+
+
+
 }
