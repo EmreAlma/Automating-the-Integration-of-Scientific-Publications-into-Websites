@@ -49,4 +49,22 @@ public class FirstService {
         }
         return  "";
     }
+    public String getAuthorsPage(String param ){
+        Gson gson = new Gson();
+        HttpClient httpClient = HttpClient.newBuilder()
+                .build();
+        try {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .GET()
+                    .uri(URI.create("https://dblp.org/search/publ/api?q=author%3A"+param+"%3A&format=json"))
+                    .build();
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            var responseBody = gson.fromJson(response.body(), Response.class);
+            return response.body();
+
+        }catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return  "";
+    }
 }

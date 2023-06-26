@@ -21,4 +21,8 @@ public class Controller {
                             @RequestParam(value = "year", required = false) String year){
         return firstService.getAuthor(param, year);
     }
+    @GetMapping("/page")
+    public String getAuthorsPage(@RequestParam(value = "name", required = false) String param){
+        return firstService.getAuthorsPage(param);
+    }
 }
