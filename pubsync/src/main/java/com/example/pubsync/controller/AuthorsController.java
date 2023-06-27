@@ -35,21 +35,21 @@ public class AuthorsController {
     @GetMapping("/")
     public String uiFirstPage() {
 
-        return "config";
+        return "index";
     }
 
     @GetMapping("/addAuthor")
     public String addAuthor() {
 
-        return "addAuthor";
+        return "index";
     }
 
     @PostMapping("/createAuthor")
-    public String createAuthor(@RequestParam(value = "username", required = false) String username,
-                               @RequestParam(value = "lastname", required = false) String lastname) {
+    public String createAuthor(@RequestParam(value = "name", required = false) String name,
+                               @RequestParam(value = "surname", required = false) String surname) {
         Authors  authors=new Authors();
-        authors.setName(username);
-        authors.setLastName(lastname);
+        authors.setName(name);
+        authors.setLastName(surname);
         authors.setActive(true);
 
         authorRepository.save(authors);

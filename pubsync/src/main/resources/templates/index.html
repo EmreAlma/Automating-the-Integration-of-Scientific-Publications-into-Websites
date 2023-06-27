@@ -5,18 +5,14 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-  <title>Title</title>
-
 </head>
 <body>
-
-
 <table class="table table-dark">
   <thead>
   <tr>
-    <th scope="col">FilePath</th>
-    <th scope="col">FileSize</th>
-    <th scope="col">File extention</th>
+    <th scope="col">Name</th>
+    <th scope="col">Surname</th>
+    <th scope="col">Active</th>
   </tr>
   </thead>
   <tbody>
@@ -24,13 +20,20 @@
     <td th:text="${author.getName()}">Name</td>
     <td th:text="${author.getLastName()}">Position</td>
     <td th:text="${author.isActive()}">Office</td>
-
-    <td><a class="btn btn-danger"  method="DELETE" th:href="@{/ui/deleteAuthor/{fileId}(fileId=${author.getId()})}"  >Delete Todo</a></td>
-
+    <td><a class="btn btn-danger"  method="DELETE" th:href="@{/ui/deleteAuthor/{fileId}(fileId=${author.getId()})}">Delete Author</a></td>
   </tr>
-
   </tbody>
 </table>
 
+<form method="post" th:action="@{/ui/createAuthor}">
+  <div class="form-group">
+    <label>Add New Author</label>
+    <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" id="surname" name="surname" placeholder="Surname">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 </body>
 </html>
