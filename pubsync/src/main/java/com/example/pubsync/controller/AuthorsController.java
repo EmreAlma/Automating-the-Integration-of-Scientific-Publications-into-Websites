@@ -1,6 +1,6 @@
 package com.example.pubsync.controller;
 
-import com.example.pubsync.model.Authors;
+import com.example.pubsync.entity.Authors;
 import com.example.pubsync.repository.AuthorRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

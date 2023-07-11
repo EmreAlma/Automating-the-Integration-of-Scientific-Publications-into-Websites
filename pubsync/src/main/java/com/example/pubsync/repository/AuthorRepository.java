@@ -1,6 +1,6 @@
 package com.example.pubsync.repository;
 
-import com.example.pubsync.model.Authors;
+import com.example.pubsync.entity.Authors;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
