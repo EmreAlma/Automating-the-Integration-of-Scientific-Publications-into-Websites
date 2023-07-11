@@ -13,42 +13,6 @@ import java.net.http.HttpResponse;
 @Service
 public class FirstService {
 
-    public String getTestData(String param){
-        Gson gson = new Gson();
-        HttpClient httpClient = HttpClient.newBuilder()
-                .build();
-        try {
-            HttpRequest request = HttpRequest.newBuilder()
-                    .GET()
-                    .uri(URI.create("https://dblp.org/search/publ/api?q=test&format="+param))
-                    .build();
-            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-            var testObject = gson.fromJson(response.body(), FirstService.class);
-            return response.body();
-
-        }catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-        return  "";
-    }
-    public String getAuthor(String param, String year){
-        Gson gson = new Gson();
-        HttpClient httpClient = HttpClient.newBuilder()
-                .build();
-        try {
-            HttpRequest request = HttpRequest.newBuilder()
-                    .GET()
-                    .uri(URI.create("https://dblp.org/search/publ/api?q="+param+"$+"+year+"&format=json"))
-                    .build();
-            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-            Response responseBody = gson.fromJson(response.body(), Response.class);
-            return response.body();
-
-        }catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-        return  "";
-    }
     public String getAuthorsPage(String param ){
         Gson gson = new Gson();
         HttpClient httpClient = HttpClient.newBuilder()
