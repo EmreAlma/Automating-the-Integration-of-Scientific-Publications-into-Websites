@@ -1,6 +1,7 @@
 package com.example.pubsync.service;
 
 import com.example.pubsync.model.Response;
+import com.example.pubsync.repository.PublicationsRepository;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,14 @@ import java.net.http.HttpResponse;
 @Service
 public class FirstService {
 
+    private final ConverterService converterService;
+
+    private final PublicationsRepository publicationsRepository;
+
+    public FirstService(ConverterService converterService, PublicationsRepository publicationsRepository) {
+        this.converterService = converterService;
+        this.publicationsRepository = publicationsRepository;
+    }
     public String getAuthorsPage(String param ){
         Gson gson = new Gson();
         HttpClient httpClient = HttpClient.newBuilder()
@@ -24,6 +33,9 @@ public class FirstService {
                     .build();
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
             var responseBody = gson.fromJson(response.body(), Response.class);
+            var convertedModel = converterService.publicationsList(responseBody);
+            publicationsRepository.saveAll(convertedModel);
+
             return response.body();
 
         }catch (IOException | InterruptedException e) {
