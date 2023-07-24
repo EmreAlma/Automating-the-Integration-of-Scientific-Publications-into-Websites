@@ -10,6 +10,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.List;
 
 @Service
 public class FirstService {
@@ -18,12 +19,25 @@ public class FirstService {
 
     private final PublicationsRepository publicationsRepository;
 
-    public FirstService(ConverterService converterService, PublicationsRepository publicationsRepository) {
+    private final Gson gson;
+
+    public FirstService(ConverterService converterService, PublicationsRepository publicationsRepository, Gson gson) {
         this.converterService = converterService;
         this.publicationsRepository = publicationsRepository;
+        this.gson = gson;
+    }
+
+    public void fetchPublicationsForAuthors() {
+        List<String> authorNames = List.of("Timo_Kehrer", "Sandra_Greiner");
+        savePublicationsForAuthors(authorNames);
+    }
+
+    private void savePublicationsForAuthors(List<String> authorNames) {
+        for (String authorName : authorNames) {
+            getAuthorsPage(authorName);
+        }
     }
     public String getAuthorsPage(String param ){
-        Gson gson = new Gson();
         HttpClient httpClient = HttpClient.newBuilder()
                 .build();
         try {

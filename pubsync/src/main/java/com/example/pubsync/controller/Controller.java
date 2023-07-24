@@ -16,4 +16,9 @@ public class Controller {
     public String getAuthorsPage(@RequestParam(value = "name", required = false) String param){
         return firstService.getAuthorsPage(param);
     }
+    @GetMapping("/publications")
+    public void fetchPublicationsForAuthors() {
+        firstService.fetchPublicationsForAuthors();
+    }
+
 }
