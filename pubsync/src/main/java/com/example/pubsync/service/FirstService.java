@@ -28,7 +28,7 @@ public class FirstService {
     }
 
     public void fetchPublicationsForAuthors() {
-        List<String> authorNames = List.of("Timo_Kehrer", "Sandra_Greiner");
+        List<String> authorNames = List.of("Timo_Kehrer");
         savePublicationsForAuthors(authorNames);
     }
 
