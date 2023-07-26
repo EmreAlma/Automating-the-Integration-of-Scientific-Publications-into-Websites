@@ -1,7 +1,9 @@
 package com.example.pubsync.service;
 
 
+import com.example.pubsync.entity.Authors;
 import com.example.pubsync.model.Response;
+import com.example.pubsync.repository.AuthorRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -12,19 +14,28 @@ public class AuthorPublicationService {
 
     private final PublicationDatabaseManager publicationDatabaseManager;
 
-    public AuthorPublicationService(AuthorApiService authorApiService, PublicationDatabaseManager publicationDatabaseManager) {
+    private  final AuthorRepository authorRepository;
+    public AuthorPublicationService(AuthorApiService authorApiService, PublicationDatabaseManager publicationDatabaseManager, AuthorRepository authorRepository) {
         this.authorApiService = authorApiService;
         this.publicationDatabaseManager = publicationDatabaseManager;
+        this.authorRepository = authorRepository;
     }
 
 
     public void fetchAndSavePublicationsForAuthors() {
-        List<String> authorNames = List.of("Timo_Kehrer", "Sandra_Greiner");
+        List<Authors> authors = authorRepository.findAll();
 
-        for (String authorName : authorNames) {
-            Response authorData = authorApiService.getAuthorsPage(authorName);
+        for (Authors author : authors) {
+            String formattedName = formatAuthorName(author);
+            Response authorData = authorApiService.getAuthorsPage(formattedName);
             publicationDatabaseManager.savePublications(authorData);
         }
     }
 
+    private String formatAuthorName(Authors author) {
+        String firstName = author.getName();
+        String lastName = author.getLastName();
+
+        return firstName + "_" + lastName;
+    }
 }
