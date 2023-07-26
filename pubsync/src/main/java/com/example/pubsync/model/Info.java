@@ -2,13 +2,14 @@ package com.example.pubsync.model;
 
 import com.google.gson.annotations.SerializedName;
 
+
 public class Info{
 
 	@SerializedName("ee")
 	private String ee;
 
 	@SerializedName("venue")
-	private String venue;
+	private Object venue;
 
 	@SerializedName("pages")
 	private String pages;
@@ -54,11 +55,11 @@ public class Info{
 		return ee;
 	}
 
-	public void setVenue(String venue){
+	public void setVenue(Object venue){
 		this.venue = venue;
 	}
 
-	public String getVenue(){
+	public Object getVenue(){
 		return venue;
 	}
 

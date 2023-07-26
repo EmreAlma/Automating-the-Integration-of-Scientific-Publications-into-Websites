@@ -1,18 +1,17 @@
 package com.example.pubsync.model;
 
-import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
 public class Authors{
 
 	@SerializedName("author")
-	private List<AuthorItem> author;
+	private Object author;
 
-	public void setAuthor(List<AuthorItem> author){
+	public void setAuthor(Object author){
 		this.author = author;
 	}
 
-	public List<AuthorItem> getAuthor(){
+	public Object getAuthor(){
 		return author;
 	}
 }

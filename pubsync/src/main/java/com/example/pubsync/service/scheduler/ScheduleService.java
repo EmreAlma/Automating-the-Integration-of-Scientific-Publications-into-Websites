@@ -1,13 +1,27 @@
 package com.example.pubsync.service.scheduler;
 
+import com.example.pubsync.service.AuthorPublicationService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ScheduleService {
 
-    @Scheduled(initialDelay = 200000, fixedRate = 30000)
+    private final AuthorPublicationService authorPublicationService;
+
+    public ScheduleService(AuthorPublicationService authorPublicationService) {
+        this.authorPublicationService = authorPublicationService;
+    }
+
+    @Scheduled(initialDelay = 2000, fixedRate = 3000000)
     public void doTask() {
-        System.out.println("It works");
+
+        try {
+            System.out.println("Its starting..");
+            authorPublicationService.fetchAndSavePublicationsForAuthors();
+            System.out.println("It works..");
+        } catch (Exception e) {
+            System.out.println("Failed");
+        }
     }
 }

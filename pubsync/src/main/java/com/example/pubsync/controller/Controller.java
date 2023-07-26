@@ -13,6 +13,7 @@ public class Controller {
 
     @Autowired
     AuthorPublicationService authorPublicationService;
+    @Autowired
     AuthorApiService authorApiService;
 
     @GetMapping("/page")

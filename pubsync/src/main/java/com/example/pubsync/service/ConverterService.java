@@ -48,13 +48,12 @@ public class ConverterService {
 
     public List<String> parsePublishAuthors(Info info) {
         List<String> authors = new ArrayList<>();
-        if (info.getAuthors().getAuthor() != null) {
-            List<AuthorItem> objects = info.getAuthors().getAuthor();
+        if (info.getAuthors().getAuthor() instanceof List<?>) {
+            List<AuthorItem> objects2 = (List<AuthorItem>) info.getAuthors().getAuthor();
 
-            String jsonStr = gson.toJson(objects);
+            String jsonStr = gson.toJson(objects2);
             AuthorItem[] authorItem = gson.fromJson(jsonStr, AuthorItem[].class);
-            authors = Arrays.stream(authorItem).map(AuthorItem::getText).collect(Collectors.toList());
-
+            authors = Arrays.stream(authorItem).map(x -> x.getText()).collect(Collectors.toList());
         }
         return authors;
     }
