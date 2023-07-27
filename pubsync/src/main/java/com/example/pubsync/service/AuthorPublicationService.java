@@ -36,6 +36,9 @@ public class AuthorPublicationService {
         String firstName = author.getName();
         String lastName = author.getLastName();
 
+        firstName = firstName.replace(" ", "_");
+        lastName = lastName.replace(" ", "_");
+
         return firstName + "_" + lastName;
     }
 }
