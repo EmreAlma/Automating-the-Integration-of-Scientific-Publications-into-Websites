@@ -13,6 +13,8 @@
     <th scope="col">Name</th>
     <th scope="col">Surname</th>
     <th scope="col">Active</th>
+    <th scope="col">Start Date</th>
+    <th scope="col">Quit Date</th>
   </tr>
   </thead>
   <tbody>
@@ -20,6 +22,8 @@
     <td th:text="${author.getName()}">Name</td>
     <td th:text="${author.getLastName()}">Position</td>
     <td th:text="${author.isActive()}">Office</td>
+    <td th:text="${author.getStartDate()}">Start Date</td>
+    <td th:text="${author.getQuitDate()}">Quit Date</td>
     <td><a class="btn btn-danger" th:href="@{/ui/deleteAuthor/{fileId}(fileId=${author.getId()})}">Delete Author</a></td>
   </tr>
   </tbody>
@@ -32,6 +36,12 @@
   </div>
   <div class="form-group">
     <input type="text" class="form-control" id="surname" name="surname" placeholder="Surname">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" id="startDate" name="startDate" placeholder="Start Date">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" id="quitDate" name="quitDate" placeholder="Start Date">
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>

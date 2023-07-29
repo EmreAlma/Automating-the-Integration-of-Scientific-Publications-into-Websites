@@ -46,11 +46,16 @@ public class AuthorsController {
 
     @PostMapping("/createAuthor")
     public String createAuthor(@RequestParam(value = "name", required = false) String name,
-                               @RequestParam(value = "surname", required = false) String surname) {
+                               @RequestParam(value = "surname", required = false) String surname,
+                               @RequestParam(value = "startDate", required = false) String start_date,
+                               @RequestParam(value = "quitDate", required = false) String quit_date) {
         Authors  authors=new Authors();
         authors.setName(name);
         authors.setLastName(surname);
         authors.setActive(true);
+        authors.setStartDate(start_date);
+        authors.setQuitDate(quit_date);
+
 
         authorRepository.save(authors);
         return  "redirect:/ui/authors";

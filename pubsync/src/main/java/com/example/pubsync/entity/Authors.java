@@ -25,6 +25,12 @@ public class Authors {
     @Column(name = "active")
     private boolean active;
 
+    @Column(name = "start_date")
+    private String startDate;
+
+    @Column(name = "quit_date")
+    private String quitDate;
+
     public UUID getId() {
         return id;
     }
@@ -64,4 +70,12 @@ public class Authors {
     public void setActive(boolean active) {
         this.active = active;
     }
+
+    public String getStartDate() {return startDate; }
+
+    public void setStartDate(String startDate) {this.startDate = startDate; }
+
+    public String getQuitDate() {return quitDate; }
+
+    public void setQuitDate(String quitDate) {this.quitDate = quitDate; }
 }
