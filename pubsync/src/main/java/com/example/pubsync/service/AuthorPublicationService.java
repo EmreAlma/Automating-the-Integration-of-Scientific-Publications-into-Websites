@@ -5,6 +5,7 @@ import com.example.pubsync.entity.Authors;
 import com.example.pubsync.model.Response;
 import com.example.pubsync.repository.AuthorRepository;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -28,7 +29,7 @@ public class AuthorPublicationService {
         for (Authors author : authors) {
             String formattedName = formatAuthorName(author);
             Response authorData = authorApiService.getAuthorsPage(formattedName);
-            publicationDatabaseManager.savePublications(authorData);
+            publicationDatabaseManager.savePublications(authorData, author);
         }
     }
 
@@ -41,4 +42,5 @@ public class AuthorPublicationService {
 
         return firstName + "_" + lastName;
     }
+
 }
