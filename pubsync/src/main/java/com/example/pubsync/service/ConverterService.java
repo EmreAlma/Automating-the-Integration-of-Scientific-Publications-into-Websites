@@ -1,6 +1,6 @@
 package com.example.pubsync.service;
 
-import com.example.pubsync.entity.Publications;
+import com.example.pubsync.entity.Publication;
 import com.example.pubsync.model.HitItem;
 import com.example.pubsync.model.Info;
 import com.example.pubsync.model.Response;
@@ -21,28 +21,28 @@ public class ConverterService {
         this.gson = gson;
     }
 
-    public List<Publications> publicationsList(Response response) {
-        List<Publications> publicationsList = new ArrayList<>();
+    public List<Publication> publicationsList(Response response) {
+        List<Publication> publicationList = new ArrayList<>();
         List<HitItem> hits = response.getResult().getHits().getHit();
         for (var hit : hits) {
             var info = hit.getInfo();
-            Publications publications = new Publications();
-            publications.setPublishLink(info.getEe());
-            publications.setDoiNumber(info.getDoi());
-            publications.setAccess(info.getAccess());
-            publications.setAuthorPageURL(info.getUrl());
-            if (info.getVenue() != null) publications.setVenue(info.getVenue().toString());
-            publications.setYear(info.getYear());
-            publications.setType(info.getType());
-            publications.setTitle(info.getTitle());
-            publications.setPages(info.getPages());
-            publications.setKey(info.getKey());
-            publications.setPublishAuthors(parsePublishAuthors(info));
+            Publication publication = new Publication();
+            publication.setPublishLink(info.getEe());
+            publication.setDoiNumber(info.getDoi());
+            publication.setAccess(info.getAccess());
+            publication.setAuthorPageURL(info.getUrl());
+            if (info.getVenue() != null) publication.setVenue(info.getVenue().toString());
+            publication.setYear(info.getYear());
+            publication.setType(info.getType());
+            publication.setTitle(info.getTitle());
+            publication.setPages(info.getPages());
+            publication.setKey(info.getKey());
+            publication.setPublishAuthors(parsePublishAuthors(info));
 
-            publicationsList.add(publications);
+            publicationList.add(publication);
 
         }
-        return publicationsList;
+        return publicationList;
     }
 
 

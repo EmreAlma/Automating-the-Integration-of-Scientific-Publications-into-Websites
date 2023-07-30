@@ -1,7 +1,8 @@
 package com.example.pubsync.service;
 
-import com.example.pubsync.entity.Publications;
-import com.example.pubsync.repository.PublicationsRepository;
+import com.example.pubsync.entity.Author;
+import com.example.pubsync.entity.Publication;
+import com.example.pubsync.repository.PublicationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,15 +13,15 @@ import java.util.List;
 public class FilterService {
 
     @Autowired
-    private PublicationsRepository publicationsRepository;
+    private PublicationRepository publicationRepository;
 
-    public List<Publications> fetchAndSaveNewPublications(List<Publications> databankPublications){
-        List<Publications> databasePublications = publicationsRepository.findAll();
-        List<Publications> filteredList = new ArrayList<>();
+    public List<Publication> filterAndSaveNewPublications(List<Publication> databankPublications){
+        List<Publication> databasePublications = publicationRepository.findAll();
+        List<Publication> filteredList = new ArrayList<>();
 
-        for(Publications databankPublication : databankPublications) {
+        for(Publication databankPublication : databankPublications) {
             boolean isExist = false;
-            for (Publications databasePublication : databasePublications){
+            for (Publication databasePublication : databasePublications){
                 if (databankPublication.getPublishLink().equals(databasePublication.getPublishLink())){
                     isExist = true;
                     break;
@@ -32,6 +33,19 @@ public class FilterService {
             }
             filteredList.add(databankPublication);
         }
+        return filteredList;
+    }
+
+    public List<Publication> filterByYear(List<Publication> publications, Author author){
+
+        List<Publication> filteredList = new ArrayList<>();
+
+        for (Publication publication : publications) {
+            if (Integer.parseInt(author.getStartDate()) <= Integer.parseInt(publication.getYear()) && Integer.parseInt(publication.getYear()) <= Integer.parseInt(author.getQuitDate())) {
+                filteredList.add(publication);
+            }
+        }
+
         return filteredList;
     }
 

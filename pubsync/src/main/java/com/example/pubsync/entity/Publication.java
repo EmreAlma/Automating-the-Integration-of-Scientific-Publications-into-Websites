@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.UUID;
 @Entity
 @Table(name= "publications")
-public class Publications {
+public class Publication {
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     @ManyToOne
-    private Authors authors;
+    private Author author;
     @Column(name = "publicationLink")
     private String publishLink;
     @Column(name = "venue")

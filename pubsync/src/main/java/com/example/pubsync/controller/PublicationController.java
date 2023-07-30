@@ -1,7 +1,7 @@
 package com.example.pubsync.controller;
 
-import com.example.pubsync.entity.Publications;
-import com.example.pubsync.repository.PublicationsRepository;
+import com.example.pubsync.entity.Publication;
+import com.example.pubsync.repository.PublicationRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,15 +11,15 @@ import java.util.List;
 @RestController
 public class PublicationController {
 
-    private final PublicationsRepository publicationsRepository;
+    private final PublicationRepository publicationRepository;
 
-    public PublicationController(PublicationsRepository publicationsRepository) {
-        this.publicationsRepository = publicationsRepository;
+    public PublicationController(PublicationRepository publicationRepository) {
+        this.publicationRepository = publicationRepository;
     }
 
     @GetMapping("/getbyyear")
-    public List<Publications> getPublicationByYear(@RequestParam(value = "year") String year){
+    public List<Publication> getPublicationByYear(@RequestParam(value = "year") String year){
 
-        return publicationsRepository.findPublicationsByYear(year);
+        return publicationRepository.findPublicationsByYear(year);
     }
 }

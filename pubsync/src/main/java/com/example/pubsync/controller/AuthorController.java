@@ -1,6 +1,6 @@
 package com.example.pubsync.controller;
 
-import com.example.pubsync.entity.Authors;
+import com.example.pubsync.entity.Author;
 import com.example.pubsync.repository.AuthorRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,16 +12,16 @@ import java.util.UUID;
 
 @Controller
 @RequestMapping("/ui")
-public class AuthorsController {
+public class AuthorController {
     private final AuthorRepository authorRepository;
 
-    public AuthorsController(AuthorRepository authorRepository) {
+    public AuthorController(AuthorRepository authorRepository) {
         this.authorRepository = authorRepository;
     }
 
     @GetMapping("/authors")
     public String getAuthor(Model model) {
-        List<Authors> authors = authorRepository.findAll();
+        List<Author> authors = authorRepository.findAll();
         model.addAttribute("authors", authors);
         return "index";
     }
@@ -49,15 +49,15 @@ public class AuthorsController {
                                @RequestParam(value = "surname", required = false) String surname,
                                @RequestParam(value = "startDate", required = false) String start_date,
                                @RequestParam(value = "quitDate", required = false) String quit_date) {
-        Authors  authors=new Authors();
-        authors.setName(name);
-        authors.setLastName(surname);
-        authors.setActive(true);
-        authors.setStartDate(start_date);
-        authors.setQuitDate(quit_date);
+        Author author =new Author();
+        author.setName(name);
+        author.setLastName(surname);
+        author.setActive(true);
+        author.setStartDate(start_date);
+        author.setQuitDate(quit_date);
 
 
-        authorRepository.save(authors);
+        authorRepository.save(author);
         return  "redirect:/ui/authors";
     }
 }
