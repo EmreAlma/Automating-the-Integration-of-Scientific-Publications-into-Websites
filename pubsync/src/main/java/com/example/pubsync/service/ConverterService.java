@@ -1,10 +1,7 @@
 package com.example.pubsync.service;
 
 import com.example.pubsync.entity.Publication;
-import com.example.pubsync.model.HitItem;
-import com.example.pubsync.model.Info;
-import com.example.pubsync.model.Response;
-import com.example.pubsync.model.AuthorItem;
+import com.example.pubsync.model.*;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
 
@@ -56,5 +53,21 @@ public class ConverterService {
             authors = Arrays.stream(authorItem).map(x -> x.getText()).collect(Collectors.toList());
         }
         return authors;
+    }
+    public List<PublicationView> convertPublicationViewList(List<Publication> publicationList) {
+        List<PublicationView> publicationViewList = new ArrayList<>();
+        for (var publication : publicationList) {
+            var publicationView = new PublicationView();
+            publicationView.setPublishLink(publication.getPublishLink());
+            publicationView.setVenue(publication.getVenue());
+            publicationView.setYear(publication.getYear());
+            publicationView.setTitle(publication.getTitle());
+            publicationView.setPublishAuthors(publication.getPublishAuthors());
+            publicationView.setDoiNumber(publication.getDoiNumber());
+
+            publicationViewList.add(publicationView);
+        }
+
+        return publicationViewList;
     }
 }
