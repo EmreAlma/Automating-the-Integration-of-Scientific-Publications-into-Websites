@@ -62,12 +62,21 @@ public class ConverterService {
             publicationView.setVenue(publication.getVenue());
             publicationView.setYear(publication.getYear());
             publicationView.setTitle(publication.getTitle());
-            publicationView.setPublishAuthors(publication.getPublishAuthors());
+            List<String> authorsWithoutNumbers = removeNumbersFromAuthors(publication.getPublishAuthors());
+            publicationView.setPublishAuthors(authorsWithoutNumbers);
             publicationView.setDoiNumber(publication.getDoiNumber());
 
             publicationViewList.add(publicationView);
         }
 
         return publicationViewList;
+    }
+    private List<String> removeNumbersFromAuthors(List<String> authors) {
+        List<String> authorsWithoutNumbers = new ArrayList<>();
+        for (String author : authors) {
+            String authorWithoutNumbers = author.replaceAll("\\d", "").trim();
+            authorsWithoutNumbers.add(authorWithoutNumbers);
+        }
+        return authorsWithoutNumbers;
     }
 }
