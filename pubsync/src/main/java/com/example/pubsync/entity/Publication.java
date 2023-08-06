@@ -12,8 +12,6 @@ public class Publication {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    @ManyToOne
-    private Author author;
     @Column(name = "publicationLink")
     private String publishLink;
     @Column(name = "venue")
