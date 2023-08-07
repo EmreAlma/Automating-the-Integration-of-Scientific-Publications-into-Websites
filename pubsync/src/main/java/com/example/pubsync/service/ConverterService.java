@@ -27,7 +27,7 @@ public class ConverterService {
             publication.setPublishLink(info.getEe());
             publication.setDoiNumber(info.getDoi());
             publication.setAccess(info.getAccess());
-            publication.setAuthorPageURL(info.getUrl());
+            publication.setPageURL(info.getUrl());
             if (info.getVenue() != null) publication.setVenue(info.getVenue().toString());
             publication.setYear(info.getYear());
             publication.setType(info.getType());

@@ -28,11 +28,11 @@ public class Publication {
     private String type;
     @Column(name = "key")
     private String key;
-    @Column(name = "authorPageURL")
-    private String authorPageURL;
+    @Column(name = "pageURL")
+    private String pageURL;
     @ElementCollection
     private List<String> publishAuthors;
-    @Column(name = "name")
+    @Column(name = "doi")
     private String doiNumber;
 
     public UUID getId() {
@@ -107,12 +107,12 @@ public class Publication {
         this.key = key;
     }
 
-    public String getAuthorPageURL() {
-        return authorPageURL;
+    public String getPageURL() {
+        return pageURL;
     }
 
-    public void setAuthorPageURL(String authorPageURL) {
-        this.authorPageURL = authorPageURL;
+    public void setPageURL(String pageURL) {
+        this.pageURL = pageURL;
     }
 
     public List<String> getPublishAuthors() {
