@@ -17,11 +17,11 @@ public class ScheduleService {
     public void doTask() {
 
         try {
-            System.out.println("Its starting..");
+            System.out.println("doTask is starting");
             authorPublicationService.fetchAndSavePublicationsForAuthors();
-            System.out.println("It works..");
+            System.out.println("doTask works..");
         } catch (Exception e) {
-            System.out.println("Failed");
+            System.out.println("doTask failed");
         }
     }
 }

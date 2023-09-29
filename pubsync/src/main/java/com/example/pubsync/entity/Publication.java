@@ -30,7 +30,7 @@ public class Publication {
     private String key;
     @Column(name = "pageURL")
     private String pageURL;
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> publishAuthors;
     @Column(name = "doi")
     private String doiNumber;
