@@ -20,16 +20,16 @@ public class PublicationController {
         this.converterService = converterService;
     }
 
-    @GetMapping("/getbyyear")
+    /*@GetMapping("/getbyyear")
     public List<PublicationView> getPublicationByYear(@RequestParam(value = "year") String year){
 
         return converterService.convertPublicationViewList(publicationRepository.findPublicationsByYear(year));
-    }
+    }*/
 
     @GetMapping("/all")
     @CrossOrigin(origins = "http://localhost:1313")
     public List<PublicationView> getAllPublications() {
-        List<PublicationView> allPublications = new ArrayList<>();
+       /* List<PublicationView> allPublications = new ArrayList<>();
 
         for (int year = 2019; year <= 2023; year++) {
             String yearStr = String.valueOf(year);
@@ -37,6 +37,7 @@ public class PublicationController {
             allPublications.addAll(publications);
         }
 
-        return allPublications;
+        return allPublications;*/
+        return converterService.convertPublicationViewList(publicationRepository.findAll());
     }
 }

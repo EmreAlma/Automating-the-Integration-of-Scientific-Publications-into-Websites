@@ -1,3 +1,4 @@
+/*
 package com.example.pubsync.controller;
 
 import com.example.pubsync.model.PublicationView;
@@ -28,3 +29,4 @@ public class PublicationViewController {
         return "publications";
     }
 }
+*/
