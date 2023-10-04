@@ -9,6 +9,6 @@ import java.util.UUID;
 
 public interface PublicationRepository extends JpaRepository<Publication, UUID> {
 
-    @Query("FROM Publication WHERE year = ?1")
-    List<Publication> findPublicationsByYear(String year);
+    /*@Query("FROM Publication WHERE year = ?1")
+    List<Publication> findPublicationsByYear(String year);*/
 }

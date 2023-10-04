@@ -20,9 +20,9 @@ public class Controller {
     public Response getAuthorsPage(@RequestParam(value = "name", required = false) String param){
         return authorApiService.getAuthorsPage(param);
     }
-    @GetMapping("/publications")
+   /* @GetMapping("/publications")
     public void fetchPublicationsForAuthors() {
         authorPublicationService.fetchAndSavePublicationsForAuthors();
-    }
+    }*/
 
 }
