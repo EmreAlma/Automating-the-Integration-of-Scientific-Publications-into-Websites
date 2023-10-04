@@ -27,36 +27,15 @@ public class AuthorController {
     }
 
     @GetMapping("/deleteAuthor/{id}")
-    public String deleteAuthor(@PathVariable String id) {
-        authorRepository.deleteById(UUID.fromString(id));
+    public String deleteAuthor(@PathVariable UUID id) {
+        authorRepository.deleteById(id);
         return "redirect:/ui/authors";
     }
 
-    @GetMapping("/")
-    public String uiFirstPage() {
 
-        return "index";
-    }
-
-    @GetMapping("/addAuthor")
-    public String addAuthor() {
-
-        return "index";
-    }
-
-    @PostMapping("/createAuthor")
-    public String createAuthor(@RequestParam(value = "name", required = false) String name,
-                               @RequestParam(value = "surname", required = false) String surname,
-                               @RequestParam(value = "startDate", required = false) String start_date,
-                               @RequestParam(value = "quitDate", required = false) String quit_date) {
-        Author author =new Author();
-        author.setName(name);
-        author.setLastName(surname);
-        author.setActive(true);
-        author.setStartDate(start_date);
-        author.setQuitDate(quit_date);
-
-
+    @PostMapping("/addAuthor")
+    public String addAuthor(@ModelAttribute Author author) {
+       author.setActive(true);
         authorRepository.save(author);
         return  "redirect:/ui/authors";
     }
