@@ -17,12 +17,8 @@ public class Controller {
     AuthorApiService authorApiService;
 
     @GetMapping("/page")
-    public Response getAuthorsPage(@RequestParam(value = "name", required = false) String param){
+    public Response getAuthorsPage(@RequestParam(value = "name", required = false) String param) {
         return authorApiService.getAuthorsPage(param);
     }
-   /* @GetMapping("/publications")
-    public void fetchPublicationsForAuthors() {
-        authorPublicationService.fetchAndSavePublicationsForAuthors();
-    }*/
 
 }

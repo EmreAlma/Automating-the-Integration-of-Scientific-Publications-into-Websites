@@ -21,7 +21,7 @@ public class PublicationDatabaseManager {
     }
 
     public void savePublications(Response response, Author author) {
-        var convertModel = ConverterService.publicationsList(response);
+        var convertModel = ConverterService.convertResponsePublicationsList(response);
         convertModel = filterService.filterByYear(convertModel, author);
         convertModel = filterService.filterAndSaveNewPublications(convertModel);
         publicationRepository.saveAll(convertModel);
