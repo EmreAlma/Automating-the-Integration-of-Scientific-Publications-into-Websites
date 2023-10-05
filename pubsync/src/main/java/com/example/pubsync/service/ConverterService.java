@@ -18,7 +18,7 @@ public class ConverterService {
         this.gson = gson;
     }
 
-    public List<Publication> publicationsList(Response response) {
+    public List<Publication> convertResponsePublicationsList(Response response) {
         List<Publication> publicationList = new ArrayList<>();
         List<HitItem> hits = response.getResult().getHits().getHit();
         for (var hit : hits) {
