@@ -34,6 +34,8 @@ public class Publication {
     private List<String> publishAuthors;
     @Column(name = "doi")
     private String doiNumber;
+    @Column(name = "pdfLink")
+    private String pdfLink;
 
     public UUID getId() {
         return id;
@@ -130,5 +132,12 @@ public class Publication {
     public void setDoiNumber(String doiNumber) {
         this.doiNumber = doiNumber;
     }
-}
 
+    public String getPdfLink() {
+        return pdfLink;
+    }
+
+    public void setPdfLink(String pdfLink) {
+        this.pdfLink = pdfLink;
+    }
+}

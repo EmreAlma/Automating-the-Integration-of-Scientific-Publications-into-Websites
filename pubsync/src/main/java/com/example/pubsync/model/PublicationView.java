@@ -11,6 +11,7 @@ public class PublicationView {
     private String title;
     private List<String> publishAuthors;
     private String doiNumber;
+    private String pdfLink;
 
     public String getPublishLink() {
         return publishLink;
@@ -58,5 +59,13 @@ public class PublicationView {
 
     public void setDoiNumber(String doiNumber) {
         this.doiNumber = doiNumber;
+    }
+
+    public String getPdfLink() {
+        return pdfLink;
+    }
+
+    public void setPdfLink(String pdfLink) {
+        this.pdfLink = pdfLink;
     }
 }
