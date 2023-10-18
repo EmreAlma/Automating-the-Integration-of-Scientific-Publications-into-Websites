@@ -2,9 +2,11 @@ package com.example.pubsync.model;
 
 
 import java.util.List;
+import java.util.UUID;
 
 public class PublicationView {
 
+    private UUID id;
     private String publishLink;
     private String venue;
     private String year;
@@ -13,6 +15,12 @@ public class PublicationView {
     private String doiNumber;
     private String pdfLink;
 
+    public UUID getId() {
+        return id;
+    }
+    public void setId(UUID id) {
+        this.id = id;
+    }
     public String getPublishLink() {
         return publishLink;
     }

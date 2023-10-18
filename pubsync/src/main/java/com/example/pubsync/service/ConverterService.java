@@ -58,6 +58,7 @@ public class ConverterService {
         List<PublicationView> publicationViewList = new ArrayList<>();
         for (var publication : publicationList) {
             var publicationView = new PublicationView();
+            publicationView.setId(publication.getId());
             publicationView.setPublishLink(publication.getPublishLink());
             publicationView.setVenue(publication.getVenue());
             publicationView.setYear(publication.getYear());
@@ -65,6 +66,7 @@ public class ConverterService {
             List<String> authorsWithoutNumbers = removeNumbersFromAuthors(publication.getPublishAuthors());
             publicationView.setPublishAuthors(authorsWithoutNumbers);
             publicationView.setDoiNumber(publication.getDoiNumber());
+            publicationView.setPdfLink(publication.getPdfLink());
 
             publicationViewList.add(publicationView);
         }
