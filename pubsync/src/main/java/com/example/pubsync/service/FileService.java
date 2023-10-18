@@ -49,10 +49,9 @@ public class FileService {
                     writer.println();
                     writer.println("- " + publication.getPublishAuthors() + ". ");
                     writer.println(publication.getTitle() + ". _" + publication.getVenue() + ", " + publication.getYear() + "_.  ");
-                    if(publication.getPublishLink().startsWith("http")) {
-                        writer.println("[[Link]](" + publication.getPublishLink() + ") ");
-                    } else {
-                        writer.println("[[Link]](/link/" + publication.getPublishLink() + ") ");
+                    writer.println("[[Link]](" + publication.getPublishLink() + ") ");
+                    if (publication.getPdfLink() != null){
+                        writer.println("[[Paper]](" + publication.getPdfLink() + ") ");
                     }
                     writer.println();
                 }
