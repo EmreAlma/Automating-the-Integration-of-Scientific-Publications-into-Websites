@@ -12,7 +12,7 @@ public class Publication {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    @Column(name = "publicationLink")
+    @Column(name = "publication_link")
     private String publishLink;
     @Column(name = "venue")
     private String venue;
@@ -34,7 +34,7 @@ public class Publication {
     private List<String> publishAuthors;
     @Column(name = "doi")
     private String doiNumber;
-    @Column(name = "pdfLink")
+    @Column(name = "pdf_link")
     private String pdfLink;
 
     public UUID getId() {
