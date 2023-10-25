@@ -2,6 +2,7 @@ package com.example.pubsync.controller;
 
 import com.example.pubsync.entity.Author;
 import com.example.pubsync.repository.AuthorRepository;
+import com.example.pubsync.service.AuthorPublicationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +15,11 @@ import java.util.UUID;
 @RequestMapping("/ui")
 public class AuthorController {
     private final AuthorRepository authorRepository;
+    private final AuthorPublicationService authorPublicationService;
 
-    public AuthorController(AuthorRepository authorRepository) {
+    public AuthorController(AuthorRepository authorRepository, AuthorPublicationService authorPublicationService) {
         this.authorRepository = authorRepository;
+        this.authorPublicationService = authorPublicationService;
     }
 
     @GetMapping("/authors")
@@ -38,5 +41,11 @@ public class AuthorController {
        author.setActive(true);
         authorRepository.save(author);
         return  "redirect:/ui/authors";
+    }
+
+    @GetMapping("/fetchAndSave")
+    public String fetchAndSave() {
+        authorPublicationService.fetchAndSavePublicationsForAuthors();
+        return "redirect:/ui/authors";
     }
 }

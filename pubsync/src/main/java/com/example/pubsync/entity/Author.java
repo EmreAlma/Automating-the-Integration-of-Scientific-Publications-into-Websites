@@ -31,6 +31,9 @@ public class Author {
     @Column(name = "quit_date")
     private String quitDate;
 
+    @Column(name = "pid")
+    private String pid;
+
     public UUID getId() {
         return id;
     }
@@ -78,4 +81,8 @@ public class Author {
     public String getQuitDate() {return quitDate; }
 
     public void setQuitDate(String quitDate) {this.quitDate = quitDate; }
+
+    public String getPid() {return pid; }
+
+    public void setPid(String pid) {this.pid = pid; }
 }
