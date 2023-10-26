@@ -61,7 +61,14 @@
 
   <div class="mt-5">
     <a class="btn btn-primary btn-lg mr-3" th:href="@{/ui/fetchAndSave}">Fetch & Save</a>
-    <a class="btn btn-secondary btn-lg" th:href="@{/ui/generateMarkdown}">Generate File</a>
+    <form method="post" th:action="@{/ui/generateMarkdown}" class="mt-3">
+      <div class="input-group">
+        <input type="text" class="form-control" id="filePath" name="filePath" placeholder="Enter file path">
+        <div class="input-group-append">
+          <button type="submit" class="btn btn-secondary">Generate File</button>
+        </div>
+      </div>
+    </form>
 
   </div>
 </div>

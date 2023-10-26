@@ -18,7 +18,6 @@ import java.util.UUID;
 public class AuthorController {
     private final AuthorRepository authorRepository;
     private final AuthorPublicationService authorPublicationService;
-
     private final FileService fileService;
 
     public AuthorController(AuthorRepository authorRepository, AuthorPublicationService authorPublicationService, FileService fileService) {
@@ -54,10 +53,10 @@ public class AuthorController {
         return "redirect:/ui/authors";
     }
 
-    @GetMapping("/generateMarkdown")
-    public String generateMarkdown() {
+    @PostMapping("/generateMarkdown")
+    public String generateMarkdown(@RequestParam("filePath") String filePath) {
         try {
-            fileService.createMarkdownFile();
+            fileService.createMarkdownFile(filePath);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

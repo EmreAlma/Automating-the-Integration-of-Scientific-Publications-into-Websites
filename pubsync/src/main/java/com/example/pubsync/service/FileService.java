@@ -20,8 +20,8 @@ public class FileService {
         this.converterService = converterService;
     }
 
-    public void createMarkdownFile() throws FileNotFoundException {
-        try (PrintWriter writer = new PrintWriter("/Users/emrealma/Desktop/testwebrepo-main/content/research/publications/_index.md")) {
+    public void createMarkdownFile(String filePath) throws FileNotFoundException {
+        try (PrintWriter writer = new PrintWriter(filePath)) {
             List<PublicationView> publicationViewList = converterService.convertPublicationViewList(publicationRepository.findAll());
 
             writer.println("---");
