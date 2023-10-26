@@ -23,7 +23,7 @@
     <td th:text="${author.getName()}">Name</td>
     <td th:text="${author.getLastName()}">Surname</td>
     <td th:text="${author.getPid()}">Pid</td>
-    <td th:text="${author.isActive()}">Office</td>
+    <td th:text="${author.isActive()}">Active</td>
     <td th:text="${author.getStartDate()}">Start Date</td>
     <td th:text="${author.getQuitDate()}">Quit Date</td>
     <td><a class="btn btn-danger" th:href="@{/ui/deleteAuthor/{fileId}(fileId=${author.getId()})}">Delete Author</a></td>
@@ -52,9 +52,8 @@
 </form>
 <br>
 <br>
-  <a class="btn btn-primary" th:href="@{/ui/fetchAndSave}">Fetch and Save</a>
-<br>
-
+  <a class="btn btn-primary btn-lg" th:href="@{/ui/fetchAndSave}">Fetch & Save</a>
+  <a class="btn btn-secondary btn-lg" th:href="@{/ui/generateMarkdown}">Generate File</a>
 
 </body>
 </html>

@@ -20,7 +20,7 @@ public class ScheduleService {
 
     @Scheduled(initialDelay = 1000, fixedRate = 7 * 24 * 60 * 60 * 1000)
     public void doTask() throws FileNotFoundException {
-        fileService.createMarkdownFile();
+
         try {
             System.out.println("doTask is starting");
             authorPublicationService.fetchAndSavePublicationsForAuthors();
@@ -28,5 +28,6 @@ public class ScheduleService {
         } catch (Exception e) {
             System.out.println("doTask failed");
         }
+            fileService.createMarkdownFile();
     }
 }
