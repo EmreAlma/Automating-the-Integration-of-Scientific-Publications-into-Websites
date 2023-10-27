@@ -7,7 +7,6 @@
   <title>Authors</title>
 </head>
 <body class="bg-light p-5">
-
 <div class="container bg-white p-5 rounded">
   <h2 class="mb-4">Authors List</h2>
   <table class="table">
@@ -30,48 +29,44 @@
       <td th:text="${author.isActive()}">Active</td>
       <td th:text="${author.getStartDate()}">Start Date</td>
       <td th:text="${author.getQuitDate()}">Quit Date</td>
-      <td><a class="btn btn-danger" th:href="@{/ui/deleteAuthor/{fileId}(fileId=${author.getId()})}">Delete</a></td>
+      <td><a class="btn btn-danger" th:href="@{/ui/deleteAuthor/{fileId}(fileId=${author.getId()})}">Delete</a>
+      </td>
     </tr>
     </tbody>
   </table>
-
-  <h2 class="mt-5 mb-3">Add New Author</h2>
   <form method="post" th:action="@{/ui/addAuthor}">
+    <h2 class="mt-3 mb-1">Add New Author</h2>
     <div class="form-row">
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
       </div>
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Surname" required>
       </div>
-    </div>
-    <div class="form-group">
-      <input type="text" class="form-control" id="pid" name="pid" placeholder="pid" required>
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
+        <input type="text" class="form-control" id="pid" name="pid" placeholder="pid" required>
+      </div>
+      <div class="form-group col-md-4">
         <input type="number" class="form-control" id="startDate" name="startDate" placeholder="Start Year" required>
       </div>
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         <input type="number" class="form-control" id="quitDate" name="quitDate" placeholder="Quit Year" required>
       </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Add Author</button>
-  </form>
-
-  <div class="mt-5">
-    <a class="btn btn-primary btn-lg mr-3" th:href="@{/ui/fetchAndSave}">Fetch & Save</a>
-    <form method="post" th:action="@{/ui/generateMarkdown}" class="mt-3">
-      <div class="input-group">
-        <input type="text" class="form-control" id="filePath" name="filePath" placeholder="Enter file path">
-        <div class="input-group-append">
-          <button type="submit" class="btn btn-secondary">Generate File</button>
-        </div>
+      <div class="form-group col-md-4">
+        <button type="submit" class="btn btn-primary">Submit</button>
       </div>
-    </form>
-
+    </div>
+  </form>
+  <div class="mt-3">
+    <h2>Actions</h2>
+    <div class="input-group input-group-lg mt-3">
+      <a class="btn btn-primary btn-lg" th:href="@{/ui/fetchAndSave}">Fetch & Save</a>
+      <input type="text" class="form-control ml-3" id="filePath" name="filePath" placeholder="Enter file path">
+      <div class="input-group-append">
+        <button type="submit" class="btn btn-secondary btn-lg">Generate File</button>
+      </div>
+    </div>
   </div>
 </div>
-
 </body>
 </html>

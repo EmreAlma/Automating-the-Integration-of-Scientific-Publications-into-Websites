@@ -13,7 +13,7 @@ public class ScheduleService {
         this.authorPublicationService = authorPublicationService;
     }
 
-    @Scheduled(initialDelay = 1000, fixedRate = 7 * 24 * 60 * 60 * 1000)
+    @Scheduled(cron = "@weekly")
     public void doTask() {
 
         try {
