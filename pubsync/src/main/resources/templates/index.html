@@ -61,10 +61,14 @@
     <h2>Actions</h2>
     <div class="input-group input-group-lg mt-3">
       <a class="btn btn-primary btn-lg" th:href="@{/ui/fetchAndSave}">Fetch & Save</a>
-      <input type="text" class="form-control ml-3" id="filePath" name="filePath" placeholder="Enter file path">
-      <div class="input-group-append">
-        <button type="submit" class="btn btn-secondary btn-lg">Generate File</button>
-      </div>
+      <form method="post" th:action="@{/ui/generateMarkdown}" class="flex-grow-1 ml-3">
+        <div class="input-group input-group-lg">
+          <input type="text" class="form-control" id="filePath" name="filePath" placeholder="Enter file path" required>
+          <div class="input-group-append">
+            <button type="submit" class="btn btn-primary btn-lg">Generate File</button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>
