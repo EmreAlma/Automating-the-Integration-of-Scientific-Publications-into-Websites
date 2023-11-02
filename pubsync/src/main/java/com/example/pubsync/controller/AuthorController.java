@@ -54,7 +54,11 @@ public class AuthorController {
     }
 
     @PostMapping("/generateMarkdown")
-    public String generateMarkdown(@RequestParam("filePath") String filePath) {
+    public String generateMarkdown(@RequestParam(value = "filePath", required = false) String filePath) {
+
+        if (filePath == null || filePath.isEmpty()) {
+            filePath = "/Users/emrealma/Documents/GitHub/Integration-of-Publications/pubsync/src/main/resources/_index.md";
+        }
         try {
             fileService.createMarkdownFile(filePath);
         } catch (FileNotFoundException e) {
