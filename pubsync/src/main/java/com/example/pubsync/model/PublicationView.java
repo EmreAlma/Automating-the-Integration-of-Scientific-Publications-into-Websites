@@ -16,6 +16,8 @@ public class PublicationView {
     private String pdfLink;
     private boolean isExportable;
 
+    private boolean isNew;
+
     public UUID getId() {
         return id;
     }
@@ -78,11 +80,17 @@ public class PublicationView {
         this.pdfLink = pdfLink;
     }
 
-    public boolean getIsExportable() {
+    public boolean isExportable() {
         return isExportable;
     }
 
-    public void setIsExportable(boolean isExportable) {
-        this.isExportable = isExportable;
+    public void setIsExportable(boolean exportable) {
+        this.isExportable = exportable;
+    }
+    public boolean isNew() {
+        return isNew;
+    }
+    public void setNew(boolean isNew) {
+        this.isNew = isNew;
     }
 }

@@ -2,6 +2,7 @@ package com.example.pubsync.entity;
 
 import jakarta.persistence.*;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 @Entity
@@ -38,6 +39,11 @@ public class Publication {
     private String pdfLink;
     @Column(name = "is_exportable" )
     private boolean isExportable;
+    @Column(name = "add_date")
+    private Instant addDate;
+
+    public Publication() {
+    }
 
     public UUID getId() {
         return id;
@@ -143,10 +149,19 @@ public class Publication {
         this.pdfLink = pdfLink;
     }
 
-    public boolean getIsExportable() {
+    public boolean isExportable() {
         return isExportable;
     }
-    public void setIsExportable(boolean isExportable) {
-        this.isExportable = isExportable;
+
+    public void setExportable(boolean exportable) {
+        isExportable = exportable;
+    }
+
+    public Instant getAddDate() {
+        return addDate;
+    }
+
+    public void setAddDate(Instant addDate) {
+        this.addDate = addDate;
     }
 }

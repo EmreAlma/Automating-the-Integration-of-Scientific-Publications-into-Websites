@@ -41,7 +41,7 @@ public class PublicationViewController {
     @PostMapping("/export/{id}")
     public String export(@PathVariable("id") UUID id, @RequestParam(value = "isExportable", defaultValue = "false") Boolean isExportable) {
         Publication publication = publicationRepository.findById(id).orElseThrow();
-        publication.setIsExportable(isExportable);
+        publication.setExportable(isExportable);
         publicationRepository.save(publication);
         return "redirect:/all";
     }

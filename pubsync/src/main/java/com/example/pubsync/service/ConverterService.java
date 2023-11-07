@@ -5,6 +5,8 @@ import com.example.pubsync.model.*;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -35,7 +37,8 @@ public class ConverterService {
             publication.setPages(info.getPages());
             publication.setKey(info.getKey());
             publication.setPublishAuthors(parsePublishAuthors(info));
-            publication.setIsExportable(true);
+            publication.setExportable(true);
+            publication.setAddDate(Instant.now());
 
             publicationList.add(publication);
 
@@ -68,7 +71,8 @@ public class ConverterService {
             publicationView.setPublishAuthors(authorsWithoutNumbers);
             publicationView.setDoiNumber(publication.getDoiNumber());
             publicationView.setPdfLink(publication.getPdfLink());
-            publicationView.setIsExportable(publication.getIsExportable());
+            publicationView.setIsExportable(publication.isExportable());
+            publicationView.setNew(publication.getAddDate().compareTo(ZonedDateTime.now().minusMinutes(3).toInstant())>=0);
 
             publicationViewList.add(publicationView);
         }

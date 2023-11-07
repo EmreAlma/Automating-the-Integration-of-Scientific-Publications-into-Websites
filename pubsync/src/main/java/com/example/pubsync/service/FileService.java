@@ -25,7 +25,7 @@ public class FileService {
             List<PublicationView> publicationViewList = converterService.convertPublicationViewList(publicationRepository.findAll());
 
             List<PublicationView> exportablePublications = publicationViewList.stream()
-                    .filter(PublicationView::getIsExportable).toList();
+                    .filter(PublicationView::isExportable).toList();
 
             writer.println("---");
             writer.println("title: \"Publications\"");

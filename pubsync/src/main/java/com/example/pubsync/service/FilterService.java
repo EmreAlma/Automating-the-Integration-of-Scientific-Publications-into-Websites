@@ -6,6 +6,7 @@ import com.example.pubsync.repository.PublicationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,8 +41,15 @@ public class FilterService {
 
         List<Publication> filteredList = new ArrayList<>();
 
+        int startYear = Integer.parseInt(author.getStartDate());
+        int currentYear = Year.now().getValue();
+
+        int endYear = (author.getQuitDate() == null || author.getQuitDate().isEmpty()) ?
+                currentYear : Integer.parseInt(author.getQuitDate());
+
         for (Publication publication : publications) {
-            if (Integer.parseInt(author.getStartDate()) <= Integer.parseInt(publication.getYear()) && Integer.parseInt(publication.getYear()) <= Integer.parseInt(author.getQuitDate())) {
+            int publicationYear = Integer.parseInt(publication.getYear());
+            if (startYear <= publicationYear && publicationYear <= endYear) {
                 filteredList.add(publication);
             }
         }

@@ -42,15 +42,16 @@ public class AuthorController {
 
     @PostMapping("/addAuthor")
     public String addAuthor(@ModelAttribute Author author) {
-       author.setActive(true);
+        author.setActive(true);
         authorRepository.save(author);
         return  "redirect:/ui/authors";
     }
 
     @GetMapping("/fetchAndSave")
-    public String fetchAndSave() {
-        authorPublicationService.fetchAndSavePublicationsForAuthors();
-        return "redirect:/ui/authors";
+    public String fetchAndSave(Model model) {
+        List<Author> authors = authorRepository.findAll();
+        model.addAttribute("authors", authors);
+        return "index";
     }
 
     @PostMapping("/generateMarkdown")
@@ -64,6 +65,13 @@ public class AuthorController {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+        return "redirect:/ui/authors";
+    }
+    @PostMapping("/ui/updateAuthorStatus/{authorId}")
+    public String updateAuthorStatus(@PathVariable("authorId") UUID authorId, @RequestParam boolean active) {
+        Author author = authorRepository.findById(authorId).orElseThrow();
+        author.setActive(active);
+        authorRepository.save(author);
         return "redirect:/ui/authors";
     }
 }
