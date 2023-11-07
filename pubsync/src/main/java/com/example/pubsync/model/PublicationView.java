@@ -14,6 +14,7 @@ public class PublicationView {
     private List<String> publishAuthors;
     private String doiNumber;
     private String pdfLink;
+    private boolean isExportable;
 
     public UUID getId() {
         return id;
@@ -75,5 +76,13 @@ public class PublicationView {
 
     public void setPdfLink(String pdfLink) {
         this.pdfLink = pdfLink;
+    }
+
+    public boolean getIsExportable() {
+        return isExportable;
+    }
+
+    public void setIsExportable(boolean isExportable) {
+        this.isExportable = isExportable;
     }
 }

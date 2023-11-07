@@ -24,6 +24,9 @@ public class FileService {
         try (PrintWriter writer = new PrintWriter(filePath)) {
             List<PublicationView> publicationViewList = converterService.convertPublicationViewList(publicationRepository.findAll());
 
+            List<PublicationView> exportablePublications = publicationViewList.stream()
+                    .filter(PublicationView::getIsExportable).toList();
+
             writer.println("---");
             writer.println("title: \"Publications\"");
             writer.println("bg_image: \"images/2020-landscape-2.png\"");
@@ -39,7 +42,7 @@ public class FileService {
             writer.println();
 
             Map<Integer, List<PublicationView>> publicationsByYear = new TreeMap<>(Comparator.reverseOrder());
-            for (PublicationView publication : publicationViewList) {
+            for (PublicationView publication : exportablePublications) {
                 publicationsByYear.computeIfAbsent(Integer.valueOf(publication.getYear()), k -> new ArrayList<>()).add(publication);
             }
 
@@ -50,7 +53,7 @@ public class FileService {
                     writer.println("- " + publication.getPublishAuthors() + ". ");
                     writer.println(publication.getTitle() + ". _" + publication.getVenue() + ", " + publication.getYear() + "_.  ");
                     writer.println("[[Link]](" + publication.getPublishLink() + ") ");
-                    if (publication.getPdfLink() != null){
+                    if (publication.getPdfLink() != null) {
                         writer.println("[[Paper]](" + publication.getPdfLink() + ") ");
                     }
                     writer.println();

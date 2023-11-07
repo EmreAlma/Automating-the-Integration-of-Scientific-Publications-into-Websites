@@ -35,6 +35,7 @@ public class ConverterService {
             publication.setPages(info.getPages());
             publication.setKey(info.getKey());
             publication.setPublishAuthors(parsePublishAuthors(info));
+            publication.setIsExportable(true);
 
             publicationList.add(publication);
 
@@ -67,6 +68,7 @@ public class ConverterService {
             publicationView.setPublishAuthors(authorsWithoutNumbers);
             publicationView.setDoiNumber(publication.getDoiNumber());
             publicationView.setPdfLink(publication.getPdfLink());
+            publicationView.setIsExportable(publication.getIsExportable());
 
             publicationViewList.add(publicationView);
         }

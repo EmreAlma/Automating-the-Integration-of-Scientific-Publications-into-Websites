@@ -36,6 +36,8 @@ public class Publication {
     private String doiNumber;
     @Column(name = "pdf_link")
     private String pdfLink;
+    @Column(name = "is_exportable" )
+    private boolean isExportable;
 
     public UUID getId() {
         return id;
@@ -139,5 +141,12 @@ public class Publication {
 
     public void setPdfLink(String pdfLink) {
         this.pdfLink = pdfLink;
+    }
+
+    public boolean getIsExportable() {
+        return isExportable;
+    }
+    public void setIsExportable(boolean isExportable) {
+        this.isExportable = isExportable;
     }
 }
