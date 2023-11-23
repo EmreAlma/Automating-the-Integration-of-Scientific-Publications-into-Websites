@@ -48,10 +48,9 @@ public class AuthorController {
     }
 
     @GetMapping("/fetchAndSave")
-    public String fetchAndSave(Model model) {
-        List<Author> authors = authorRepository.findAll();
-        model.addAttribute("authors", authors);
-        return "index";
+    public String fetchAndSave() {
+        authorPublicationService.fetchAndSavePublicationsForAuthors();
+        return "redirect:/ui/authors";
     }
 
     @PostMapping("/generateMarkdown")
