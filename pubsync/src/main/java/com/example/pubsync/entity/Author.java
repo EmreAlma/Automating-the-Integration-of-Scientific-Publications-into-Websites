@@ -7,7 +7,7 @@ import java.time.Instant;
 import java.util.UUID;
 
 @Entity
-@Table(name = "authors")
+@Table(name = "AUTHORS")
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -6,7 +6,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 @Entity
-@Table(name= "publications")
+@Table(name= "PUBLICATIONS")
 public class Publication {
 
 
@@ -21,13 +21,13 @@ public class Publication {
     private String pages;
     @Column(name = "access")
     private String access;
-    @Column(name = "year")
+    @Column(name = "publication_year")
     private String year;
     @Column(name = "title")
     private String title;
     @Column(name = "type")
     private String type;
-    @Column(name = "key")
+    @Column(name = "author_key")
     private String key;
     @Column(name = "pageURL")
     private String pageURL;
