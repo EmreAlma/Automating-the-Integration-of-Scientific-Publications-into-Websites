@@ -27,14 +27,12 @@
       <td th:text="${author.getLastName()}">Surname</td>
       <td th:text="${author.getPid()}">Pid</td>
       <td>
-        <form th:action="@{/ui/updateAuthorStatus/{authorId}(authorId=${author.id})}" method="post">
-          <input type="checkbox" th:checked="${author.active}" th:name="active" onchange="this.form.submit()"/>
-        </form>
+        <div th:if="${author.isActive()}">Active</div>
       </td>
       <td th:text="${author.getStartDate()}">Start Date</td>
       <td th:text="${author.getQuitDate()}">Quit Date</td>
-      <td><a class="btn btn-danger" th:href="@{/ui/deleteAuthor/{fileId}(fileId=${author.getId()})}">Delete</a>
-      </td>
+      <td><a class="btn btn-danger" th:href="@{/ui/deleteAuthor/{fileId}(fileId=${author.getId()})}">Delete</a></td>
+      <td><a class="btn btn-primary" th:href="@{/ui/updateAuthor/{authorId}(authorId=${author.id})}">Update</a></td>
     </tr>
     </tbody>
   </table>

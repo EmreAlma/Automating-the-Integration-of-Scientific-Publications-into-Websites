@@ -66,10 +66,15 @@ public class AuthorController {
         }
         return "redirect:/ui/authors";
     }
-    @PostMapping("/ui/updateAuthorStatus/{authorId}")
-    public String updateAuthorStatus(@PathVariable("authorId") UUID authorId, @RequestParam boolean active) {
-        Author author = authorRepository.findById(authorId).orElseThrow();
-        author.setActive(active);
+    @GetMapping("/updateAuthor/{id}")
+    public String showUpdateAuthorForm(@PathVariable UUID id, Model model) {
+        Author author = authorRepository.findById(id).orElseThrow();
+        model.addAttribute("author", author);
+        return "update-author";
+    }
+
+    @PostMapping("/updateAuthor")
+    public String updateAuthor(@ModelAttribute Author author) {
         authorRepository.save(author);
         return "redirect:/ui/authors";
     }
