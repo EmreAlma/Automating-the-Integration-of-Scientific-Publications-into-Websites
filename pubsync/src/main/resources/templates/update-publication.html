@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <title>Publication</title>
+</head>
+<body class="bg-light p-5">
+<div class="container bg-white p-5 rounded">
+  <h2 class="mb-4">Edit Publication</h2>
+  <form method="post" th:action="@{/updatePublication}">
+    <input type="hidden" th:field="${publication.id}" />
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" th:field="${publication.title}" id="title" placeholder="Title" required>
+      </div>
+      <div class="form-group col-md-12">
+        <label for="publishAuthors">Publish Authors</label>
+        <input type="text" class="form-control" th:field="${publication.publishAuthors}" id="publishAuthors" placeholder="Publish Authors">
+      </div>
+      <div class="form-group col-md-12">
+        <label for="venue">Venue</label>
+        <input type="text" class="form-control" th:field="${publication.venue}" id="venue" placeholder="Venue">
+      </div>
+      <div class="form-group col-md-12">
+        <label for="publishLink">Publish Link</label>
+        <input type="text" class="form-control" th:field="${publication.publishLink}" id="publishLink" placeholder="Publish Link" disabled>
+      </div>
+      <div class="form-group col-md-12">
+        <label for="pdfLink">PDF Link</label>
+        <input type="text" class="form-control" th:field="${publication.pdfLink}" id="pdfLink" placeholder="PDF Link">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="year">Year</label>
+        <input type="text" class="form-control" th:field="${publication.year}" id="year" placeholder="Year">
+      </div>
+      <div class="form-group col-md-4 justify-content-center">
+        <label for="exportable">Exportable</label>
+        <input type="checkbox" class="form-control" th:field="${publication.exportable}" id="exportable">
+      </div>
+      <div class="form-group col-md-4">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
+</body>
+</html>

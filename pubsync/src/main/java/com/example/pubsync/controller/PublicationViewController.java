@@ -45,4 +45,23 @@ public class PublicationViewController {
         publicationRepository.save(publication);
         return "redirect:/all";
     }
+    @GetMapping("/updatePublication/{id}")
+    public String showUpdatePublicationForm(@PathVariable("id") UUID id, Model model) {
+        Publication publication = publicationRepository.findById(id).orElseThrow();
+        model.addAttribute("publication", publication);
+        return "update-publication";
+    }
+    @PostMapping("/updatePublication")
+    public String updatePublication(@ModelAttribute Publication publication) {
+        publication.setAccess(publicationRepository.findById(publication.getId()).orElseThrow().getAccess());
+        publication.setAddDate(publicationRepository.findById(publication.getId()).orElseThrow().getAddDate());
+        publication.setDoiNumber(publicationRepository.findById(publication.getId()).orElseThrow().getDoiNumber());
+        publication.setKey(publicationRepository.findById(publication.getId()).orElseThrow().getKey());
+        publication.setPageURL(publicationRepository.findById(publication.getId()).orElseThrow().getPageURL());
+        publication.setPages(publicationRepository.findById(publication.getId()).orElseThrow().getPages());
+        publication.setPublishLink(publicationRepository.findById(publication.getId()).orElseThrow().getPublishLink());
+        publication.setType(publicationRepository.findById(publication.getId()).orElseThrow().getType());
+        publicationRepository.save(publication);
+        return "redirect:/all";
+    }
 }

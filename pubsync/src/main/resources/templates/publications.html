@@ -41,6 +41,9 @@
                         <a th:href="@{${publication.getPublishLink()}}" target="_blank">[Link]</a>
                         <a th:href="${publication.getPdfLink()}" th:if="${publication.getPdfLink() != null}" target="_blank">[Paper]</a>
                     </div>
+                    <div>
+                        <a class="btn btn-primary" th:href="@{/updatePublication/{id}(id=${publication.id})}">Edit</a>
+                    </div>
                     <form th:action="@{/addPdfLink/{id}(id=${publication.getId()})}" method="post">
                         <div class="input-group mb-3" th:if="${publication.getPdfLink() == null}">
                             <input type="text" class="form-control" id="pdfLink" name="pdfLink" placeholder="PDF Link">
