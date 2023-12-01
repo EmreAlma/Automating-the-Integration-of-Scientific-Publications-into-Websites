@@ -50,7 +50,7 @@ public class FileService {
                 writer.println("## " + entry.getKey());
                 for (PublicationView publication : entry.getValue()) {
                     writer.println();
-                    writer.println("- " + publication.getPublishAuthors() + ". ");
+                    writer.println("- " + String.join(", ", publication.getPublishAuthors()) + ". ");
                     writer.println(publication.getTitle() + ". _" + publication.getVenue() + ", " + publication.getYear() + "_.  ");
                     writer.println("[[Link]](" + publication.getPublishLink() + ") ");
                     if (publication.getPdfLink() != null) {
