@@ -26,17 +26,10 @@ public class PublicationViewController {
     @GetMapping("/all")
     public String getAllPublications(Model model) {
        List<PublicationView> publicationViewList = converterService.convertPublicationViewList(publicationRepository.findAll());
-
-       model.addAttribute("publicationView", publicationViewList);
+        List<Integer> publicationYears = publicationRepository.findDistinctPublicationYears();
+        model.addAttribute("publicationYears", publicationYears);
+        model.addAttribute("publicationView", publicationViewList);
         return "publications";
-    }
-    @PostMapping("/addPdfLink/{id}")
-    public String addPdfLink(@PathVariable("id") UUID id,
-                             @RequestParam("pdfLink") String pdfLink) {
-        Publication publication = publicationRepository.findById(id).orElseThrow();
-        publication.setPdfLink(pdfLink);
-        publicationRepository.save(publication);
-        return "redirect:/all";
     }
     @PostMapping("/export/{id}")
     public String export(@PathVariable("id") UUID id, @RequestParam(value = "isExportable", defaultValue = "false") Boolean isExportable) {
