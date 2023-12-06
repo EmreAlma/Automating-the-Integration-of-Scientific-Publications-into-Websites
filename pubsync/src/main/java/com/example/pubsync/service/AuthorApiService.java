@@ -1,5 +1,7 @@
 package com.example.pubsync.service;
 
+import com.example.pubsync.exception.AuthorNotFoundException;
+import com.example.pubsync.exception.DatabaseUnavailableException;
 import com.example.pubsync.model.Response;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
@@ -33,21 +35,31 @@ public class AuthorApiService {
      * @param param Search parameter for author page.
      * @return Parsed Response object from the API.
      */
-    public Response getAuthorsPage(String param) {
-        HttpClient httpClient = HttpClient.newBuilder()
-                .build();
+
+    public Response getAuthorsPage(String param) throws AuthorNotFoundException, DatabaseUnavailableException {
+        HttpClient httpClient = HttpClient.newBuilder().build();
         try {
+
             HttpRequest request = HttpRequest.newBuilder()
                     .GET()
                     .uri(URI.create("https://dblp.org/search/publ/api?q=author%3A" + param + "%3A&format=json&h=1000"))
                     .build();
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-            return gson.fromJson(response.body(), Response.class);
+
+            if (response.statusCode() != 200) {
+                throw new AuthorNotFoundException("Author not found or error in API response for: " + param);
+            }
+
+            Response parsedResponse = gson.fromJson(response.body(), Response.class);
+            if (parsedResponse == null || parsedResponse.getResult() == null || parsedResponse.getResult().getHits() == null) {
+                throw new AuthorNotFoundException("No valid data found for author: " + param);
+            }
+
+            return parsedResponse;
 
         } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
+            throw new DatabaseUnavailableException("Database server is temporarily unavailable: " + e.getMessage());
         }
-        return null;
     }
 
 }

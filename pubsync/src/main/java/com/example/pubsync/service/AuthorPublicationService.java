@@ -1,6 +1,8 @@
 package com.example.pubsync.service;
 
 import com.example.pubsync.entity.Author;
+import com.example.pubsync.exception.AuthorNotFoundException;
+import com.example.pubsync.exception.DatabaseUnavailableException;
 import com.example.pubsync.model.Response;
 import com.example.pubsync.repository.AuthorRepository;
 import org.springframework.stereotype.Service;
@@ -36,9 +38,22 @@ public class AuthorPublicationService {
         List<Author> authors = authorRepository.findAll();
 
         for (Author author : authors) {
-            String formattedName = formatAuthorName(author);
-            Response authorData = authorApiService.getAuthorsPage(formattedName);
-            publicationDatabaseManager.savePublications(authorData, author);
+            try {
+                String formattedName = formatAuthorName(author);
+                Response authorData = authorApiService.getAuthorsPage(formattedName);
+                publicationDatabaseManager.savePublications(authorData, author);
+            } catch (AuthorNotFoundException ex) {
+
+                System.err.println("Author not found: " + ex.getMessage());
+
+                continue;
+            } catch (DatabaseUnavailableException ex) {
+
+                System.err.println("Database error: " + ex.getMessage());
+
+            } catch (Exception ex) {
+                System.err.println("General error occurred: " + ex.getMessage());
+            }
         }
     }
 

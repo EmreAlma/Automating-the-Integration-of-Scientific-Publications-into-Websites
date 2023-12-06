@@ -22,8 +22,9 @@ public class ConverterService {
 
     public List<Publication> convertResponsePublicationsList(Response response) {
         List<Publication> publicationList = new ArrayList<>();
-        List<HitItem> hits = response.getResult().getHits().getHit();
-        for (var hit : hits) {
+        if (response.getResult() != null && response.getResult().getHits() != null) {
+            List<HitItem> hits = response.getResult().getHits().getHit();
+            for (var hit : hits) {
             var info = hit.getInfo();
             Publication publication = new Publication();
             publication.setPublishLink(info.getEe());
@@ -41,7 +42,7 @@ public class ConverterService {
             publication.setAddDate(Instant.now());
 
             publicationList.add(publication);
-
+            }
         }
         return publicationList;
     }
