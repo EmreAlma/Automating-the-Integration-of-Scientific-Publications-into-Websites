@@ -3,12 +3,13 @@ package com.example.pubsync.service;
 import com.example.pubsync.entity.Publication;
 import com.example.pubsync.model.*;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Type;
 import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,67 +26,44 @@ public class ConverterService {
         if (response.getResult() != null && response.getResult().getHits() != null) {
             List<HitItem> hits = response.getResult().getHits().getHit();
             for (var hit : hits) {
-            var info = hit.getInfo();
-            Publication publication = new Publication();
-            publication.setPublishLink(info.getEe());
-            publication.setDoiNumber(info.getDoi());
-            publication.setAccess(info.getAccess());
-            publication.setPageURL(info.getUrl());
-            if (info.getVenue() != null) publication.setVenue(info.getVenue().toString());
-            publication.setYear(info.getYear());
-            publication.setType(info.getType());
-            publication.setTitle(info.getTitle());
-            publication.setPages(info.getPages());
-            publication.setKey(info.getKey());
-            publication.setPublishAuthors(parsePublishAuthors(info));
-            publication.setExportable(true);
-            publication.setAddDate(Instant.now());
+                var info = hit.getInfo();
+                Publication publication = new Publication();
+                publication.setPublishLink(info.getEe());
+                publication.setDoiNumber(info.getDoi());
+                publication.setAccess(info.getAccess());
+                publication.setPageURL(info.getUrl());
+                if (info.getVenue() != null) publication.setVenue(info.getVenue().toString());
+                publication.setYear(info.getYear());
+                publication.setType(info.getType());
+                publication.setTitle(info.getTitle());
+                publication.setPages(info.getPages());
+                publication.setKey(info.getKey());
+                publication.setPublishAuthors(parsePublishAuthors(info));
+                publication.setExportable(true);
+                publication.setAddDate(Instant.now());
+                publication.setIsNew(publication.getAddDate().compareTo(ZonedDateTime.now().minusMinutes(3).toInstant())>=0);
 
-            publicationList.add(publication);
+
+                publicationList.add(publication);
             }
         }
         return publicationList;
     }
 
-
     public List<String> parsePublishAuthors(Info info) {
         List<String> authors = new ArrayList<>();
-        if (info.getAuthors().getAuthor() instanceof List<?>) {
-            List<AuthorItem> objects2 = (List<AuthorItem>) info.getAuthors().getAuthor();
+        Object authorObject = info.getAuthors().getAuthor();
 
-            String jsonStr = gson.toJson(objects2);
-            AuthorItem[] authorItem = gson.fromJson(jsonStr, AuthorItem[].class);
-            authors = Arrays.stream(authorItem).map(x -> x.getText()).collect(Collectors.toList());
+        if (authorObject instanceof List<?>) {
+            Type authorListType = new TypeToken<List<AuthorItem>>(){}.getType();
+            String jsonStr = gson.toJson(authorObject);
+            List<AuthorItem> authorItemList = gson.fromJson(jsonStr, authorListType);
+            authors = authorItemList.stream().map(AuthorItem::getText).map(this::removeNumbersFromAuthor).collect(Collectors.toList());
         }
         return authors;
     }
-    public List<PublicationView> convertPublicationViewList(List<Publication> publicationList) {
-        List<PublicationView> publicationViewList = new ArrayList<>();
-        for (var publication : publicationList) {
-            var publicationView = new PublicationView();
-            publicationView.setId(publication.getId());
-            publicationView.setPublishLink(publication.getPublishLink());
-            publicationView.setVenue(publication.getVenue());
-            publicationView.setYear(publication.getYear());
-            publicationView.setTitle(publication.getTitle());
-            List<String> authorsWithoutNumbers = removeNumbersFromAuthors(publication.getPublishAuthors());
-            publicationView.setPublishAuthors(authorsWithoutNumbers);
-            publicationView.setDoiNumber(publication.getDoiNumber());
-            publicationView.setPdfLink(publication.getPdfLink());
-            publicationView.setIsExportable(publication.isExportable());
-            publicationView.setNew(publication.getAddDate().compareTo(ZonedDateTime.now().minusMinutes(3).toInstant())>=0);
 
-            publicationViewList.add(publicationView);
-        }
-
-        return publicationViewList;
-    }
-    private List<String> removeNumbersFromAuthors(List<String> authors) {
-        List<String> authorsWithoutNumbers = new ArrayList<>();
-        for (String author : authors) {
-            String authorWithoutNumbers = author.replaceAll("\\d", "").trim();
-            authorsWithoutNumbers.add(authorWithoutNumbers);
-        }
-        return authorsWithoutNumbers;
+    private String removeNumbersFromAuthor(String author) {
+        return author.replaceAll("\\d", "").trim();
     }
 }

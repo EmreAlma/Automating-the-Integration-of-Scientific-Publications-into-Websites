@@ -1,9 +1,7 @@
 package com.example.pubsync.controller;
 
 import com.example.pubsync.entity.Publication;
-import com.example.pubsync.model.PublicationView;
 import com.example.pubsync.repository.PublicationRepository;
-import com.example.pubsync.service.ConverterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,21 +12,18 @@ import java.util.UUID;
 @Controller
 public class PublicationViewController {
 
-    private final ConverterService converterService;
-
     private final PublicationRepository publicationRepository;
 
-    public PublicationViewController(ConverterService converterService, PublicationRepository publicationRepository) {
-        this.converterService = converterService;
+    public PublicationViewController(PublicationRepository publicationRepository) {
         this.publicationRepository = publicationRepository;
     }
 
     @GetMapping("/all")
     public String getAllPublications(Model model) {
-       List<PublicationView> publicationViewList = converterService.convertPublicationViewList(publicationRepository.findAll());
+       List<Publication> publication = publicationRepository.findAll();
         List<Integer> publicationYears = publicationRepository.findDistinctPublicationYears();
         model.addAttribute("publicationYears", publicationYears);
-        model.addAttribute("publicationView", publicationViewList);
+        model.addAttribute("publicationView", publication);
         return "publications";
     }
     @PostMapping("/export/{id}")

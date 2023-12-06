@@ -42,6 +42,9 @@ public class Publication {
     @Column(name = "add_date")
     private Instant addDate;
 
+    @Column(name = "is_new")
+    private boolean isNew;
+
     public Publication() {
     }
 
@@ -164,4 +167,9 @@ public class Publication {
     public void setAddDate(Instant addDate) {
         this.addDate = addDate;
     }
+
+    public boolean isNew() { return isNew; }
+
+    public void setIsNew(boolean isNew) { this.isNew = isNew; }
+
 }

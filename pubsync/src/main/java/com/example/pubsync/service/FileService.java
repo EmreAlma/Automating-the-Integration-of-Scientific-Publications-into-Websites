@@ -1,32 +1,24 @@
 package com.example.pubsync.service;
 
-import com.example.pubsync.model.PublicationView;
+import com.example.pubsync.entity.Publication;
 import com.example.pubsync.repository.PublicationRepository;
 import org.springframework.stereotype.Service;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.*;
+import java.util.List;
 
 @Service
 public class FileService {
 
     private final PublicationRepository publicationRepository;
-    private final ConverterService converterService;
 
-    public FileService(PublicationRepository publicationRepository, ConverterService converterService) {
+    public FileService(PublicationRepository publicationRepository) {
         this.publicationRepository = publicationRepository;
-        this.converterService = converterService;
     }
-
     public void createMarkdownFile(String filePath) throws FileNotFoundException {
         try (PrintWriter writer = new PrintWriter(filePath)) {
-            List<PublicationView> publicationViewList = converterService.convertPublicationViewList(publicationRepository.findAll());
-
-            List<PublicationView> exportablePublications = publicationViewList.stream()
-                    .filter(PublicationView::isExportable).toList();
-
+            List<Integer> publicationYears = publicationRepository.findDistinctPublicationYears();
             writer.println("---");
             writer.println("title: \"Publications\"");
             writer.println("bg_image: \"images/2020-landscape-2.png\"");
@@ -41,14 +33,13 @@ public class FileService {
             writer.println("{{< /rawhtml >}}");
             writer.println();
 
-            Map<Integer, List<PublicationView>> publicationsByYear = new TreeMap<>(Comparator.reverseOrder());
-            for (PublicationView publication : exportablePublications) {
-                publicationsByYear.computeIfAbsent(Integer.valueOf(publication.getYear()), k -> new ArrayList<>()).add(publication);
-            }
+            for (Integer year : publicationYears) {
+                writer.println("## " + year);
+                List<Publication> publicationsOfYear = publicationRepository.findAllByYear(year.toString());
 
-            for (Map.Entry<Integer, List<PublicationView>> entry : publicationsByYear.entrySet()) {
-                writer.println("## " + entry.getKey());
-                for (PublicationView publication : entry.getValue()) {
+                for (Publication publication : publicationsOfYear) {
+                    if (!publication.isExportable()) continue;
+
                     writer.println();
                     writer.println("- " + String.join(", ", publication.getPublishAuthors()) + ". ");
                     writer.println(publication.getTitle() + ". _" + publication.getVenue() + ", " + publication.getYear() + "_.  ");
