@@ -4,12 +4,14 @@ import com.example.pubsync.entity.Publication;
 import com.example.pubsync.repository.PublicationRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
 
 @Controller
+@SessionAttributes("publication")
 public class PublicationViewController {
 
     private final PublicationRepository publicationRepository;
@@ -23,7 +25,7 @@ public class PublicationViewController {
        List<Publication> publication = publicationRepository.findAll();
         List<Integer> publicationYears = publicationRepository.findDistinctPublicationYears();
         model.addAttribute("publicationYears", publicationYears);
-        model.addAttribute("publicationView", publication);
+        model.addAttribute("publication", publication);
         return "publications";
     }
     @PostMapping("/export/{id}")
@@ -40,16 +42,12 @@ public class PublicationViewController {
         return "update-publication";
     }
     @PostMapping("/updatePublication")
-    public String updatePublication(@ModelAttribute Publication publication) {
-        publication.setAccess(publicationRepository.findById(publication.getId()).orElseThrow().getAccess());
-        publication.setAddDate(publicationRepository.findById(publication.getId()).orElseThrow().getAddDate());
-        publication.setDoiNumber(publicationRepository.findById(publication.getId()).orElseThrow().getDoiNumber());
-        publication.setKey(publicationRepository.findById(publication.getId()).orElseThrow().getKey());
-        publication.setPageURL(publicationRepository.findById(publication.getId()).orElseThrow().getPageURL());
-        publication.setPages(publicationRepository.findById(publication.getId()).orElseThrow().getPages());
-        publication.setPublishLink(publicationRepository.findById(publication.getId()).orElseThrow().getPublishLink());
-        publication.setType(publicationRepository.findById(publication.getId()).orElseThrow().getType());
+    public String updatePublication(@ModelAttribute("publication") Publication publication, BindingResult result) {
+        if (result.hasErrors()) {
+            return "update-publication";
+        }
         publicationRepository.save(publication);
         return "redirect:/all";
     }
+
 }

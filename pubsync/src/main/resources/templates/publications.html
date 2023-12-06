@@ -17,7 +17,7 @@
         <th:block th:each="year : ${publicationYears}">
             <h2 th:id="${year}" th:text="${year}"></h2>
             <ul>
-                <li th:each="publication : ${publicationView}" th:if="${publication.getYear()} == ${year}">
+                <li th:each="publication : ${publication}" th:if="${publication.getYear()} == ${year}">
                     <form th:action="@{/export/{id}(id=${publication.id})}" method="post">
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" th:id="'flexSwitchCheckChecked' + ${publication.id}"
