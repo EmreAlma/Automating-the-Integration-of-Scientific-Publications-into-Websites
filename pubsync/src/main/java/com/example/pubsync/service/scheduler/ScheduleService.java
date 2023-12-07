@@ -17,11 +17,9 @@ public class ScheduleService {
     public void doTask() {
 
         try {
-            System.out.println("doTask is starting");
             authorPublicationService.fetchAndSavePublicationsForAuthors();
-            System.out.println("doTask works..");
         } catch (Exception e) {
-            System.out.println("doTask failed");
+            throw new RuntimeException(e);
         }
     }
 }
