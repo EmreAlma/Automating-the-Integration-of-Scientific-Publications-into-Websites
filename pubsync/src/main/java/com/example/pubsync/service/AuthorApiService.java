@@ -51,7 +51,7 @@ public class AuthorApiService {
             }
 
             Response parsedResponse = gson.fromJson(response.body(), Response.class);
-            if (parsedResponse == null || parsedResponse.getResult() == null || parsedResponse.getResult().getHits() == null) {
+            if (parsedResponse == null || parsedResponse.getResult() == null || parsedResponse.getResult().getHits().getHit() == null) {
                 throw new AuthorNotFoundException("No valid data found for author: " + param);
             }
 
