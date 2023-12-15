@@ -33,15 +33,12 @@ public class PublicationViewController {
      */
     @GetMapping("/all")
     public String getAllPublications(Model model) {
-       List<Publication> publications = publicationRepository.findAll();
-        publications.forEach(publication -> {
-            if (publication.getAddDate().isBefore(Instant.now().minus(30, ChronoUnit.MINUTES))) {
-                publication.setIsNew(false);
-            }
-        });
+       List<Publication> publication = publicationRepository.findAll();
         List<Integer> publicationYears = publicationRepository.findDistinctPublicationYears();
+        Instant thirtyMinutesAgo = Instant.now().minus(30, ChronoUnit.MINUTES);
+        model.addAttribute("thirtyMinutesAgo", thirtyMinutesAgo);
         model.addAttribute("publicationYears", publicationYears);
-        model.addAttribute("publication", publications);
+        model.addAttribute("publication", publication);
         return "publications";
     }
 

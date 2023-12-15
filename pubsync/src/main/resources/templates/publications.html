@@ -24,7 +24,7 @@
                                    th:checked="${publication.isExportable}" th:name="isExportable" onchange="this.form.submit()">
                             <label class="form-check-label" th:for="'flexSwitchCheckChecked' + ${publication.id}">Exportable</label>
                         </div>
-                        <div th:if="${publication.isNew()}">
+                        <div th:if="${publication.addDate.isAfter(thirtyMinutesAgo)}">
                             <span class="badge badge-pill badge-success">NEW</span>
                         </div>
                     </form>

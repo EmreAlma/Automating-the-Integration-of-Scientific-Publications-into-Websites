@@ -53,7 +53,6 @@ public class ConverterService {
                 publication.setPublishAuthors(parsePublishAuthors(info));
                 publication.setExportable(true);
                 publication.setAddDate(Instant.now());
-                publication.setIsNew(true);
 
                 publicationList.add(publication);
             }
