@@ -12,14 +12,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Service class for converting API response data into application-specific models.
+ * Utilizes Gson for JSON parsing.
+ */
 @Service
 public class ConverterService {
     private final Gson gson;
 
+    /**
+     * Constructs a ConverterService with a Gson object for JSON parsing.
+     * @param gson Gson object used for parsing JSON.
+     */
     public ConverterService(Gson gson) {
         this.gson = gson;
     }
 
+    /**
+     * Converts the API response into a list of Publication entities.
+     * @param response The Response object containing the data to be converted.
+     * @return A list of Publication entities.
+     */
     public List<Publication> convertResponsePublicationsList(Response response) {
         List<Publication> publicationList = new ArrayList<>();
         if (response.getResult() != null && response.getResult().getHits() != null) {
@@ -48,6 +61,13 @@ public class ConverterService {
         return publicationList;
     }
 
+    /**
+     * Parses the list of authors from a publication's information.
+     * Extracts author names from the Info object and processes them to a standard format.
+     *
+     * @param info The Info object containing publication details, including author information.
+     * @return A list of author names extracted and processed from the Info object.
+     */
     public List<String> parsePublishAuthors(Info info) {
         List<String> authors = new ArrayList<>();
         Object authorObject = info.getAuthors().getAuthor();
@@ -61,6 +81,13 @@ public class ConverterService {
         return authors;
     }
 
+    /**
+     * Removes numeric characters from an author's name.
+     * This is used to clean up author names that may contain extraneous numeric data.
+     *
+     * @param author The author's name to be cleaned.
+     * @return The author's name with numeric characters removed.
+     */
     private String removeNumbersFromAuthor(String author) {
         return author.replaceAll("\\d", "").trim();
     }

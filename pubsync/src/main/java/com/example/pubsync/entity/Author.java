@@ -6,12 +6,18 @@ import org.springframework.data.annotation.CreatedDate;
 import java.time.Instant;
 import java.util.UUID;
 
+/**
+ * Entity representing an author in the system.
+ * Maps to the 'AUTHORS' table in the database.
+ * Includes details such as name, activity status, and publication timeline.
+ */
 @Entity
 @Table(name = "AUTHORS")
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
+
     @CreatedDate
     @Column(name = "created_date",updatable = false)
     private Instant createdTime= Instant.now();

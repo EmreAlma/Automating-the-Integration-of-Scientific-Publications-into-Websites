@@ -8,14 +8,28 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.List;
 
+/**
+ * Service class for generating markdown files based on publication data.
+ * Interacts with the PublicationRepository to retrieve publication data.
+ */
 @Service
 public class FileService {
 
     private final PublicationRepository publicationRepository;
 
+    /**
+     * Constructs a FileService with a PublicationRepository.
+     * @param publicationRepository Repository for accessing publication data.
+     */
     public FileService(PublicationRepository publicationRepository) {
         this.publicationRepository = publicationRepository;
     }
+
+    /**
+     * Creates a markdown file with publication data at the specified file path.
+     * @param filePath The path where the markdown file will be created.
+     * @throws FileNotFoundException If the file path specified is not accessible or invalid.
+     */
     public void createMarkdownFile(String filePath) throws FileNotFoundException {
         try (PrintWriter writer = new PrintWriter(filePath)) {
             List<Integer> publicationYears = publicationRepository.findDistinctPublicationYears();

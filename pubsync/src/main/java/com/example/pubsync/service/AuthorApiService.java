@@ -13,29 +13,28 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 /**
- * This class provides a service for interacting with the DBLP API (https://dblp.org),
- * facilitating the retrieval of author information from a data source and parsing the response using Gson.
+ * Service class for interacting with the DBLP API.
+ * Provides functionality to retrieve author information based on a search parameter and parse the response.
  */
 @Service
 public class AuthorApiService {
-    /**
-     * Gson object for JSON parsing.
-     */
     private final Gson gson;
+
     /**
-     * Constructs an AuthorApiService with the provided Gson object.
-     * @param gson Gson object for JSON parsing.
+     * Constructs an AuthorApiService with a Gson object for JSON parsing.
+     * @param gson Gson object used for parsing JSON responses from the API.
      */
     public AuthorApiService(Gson gson) {
+
         this.gson = gson;
     }
-
     /**
-     * Retrieves author information from the external API based on the parameter.
-     * @param param Search parameter for author page.
-     * @return Parsed Response object from the API.
+     * Retrieves author information from the DBLP API based on the provided search parameter.
+     * @param param The search parameter used to query the DBLP API for author page.
+     * @return A Response object containing the parsed data from the API response.
+     * @throws AuthorNotFoundException If the author is not found or if the response is incorrect.
+     * @throws DatabaseUnavailableException If there is an issue with the database connection.
      */
-
     public Response getAuthorsPage(String param) throws AuthorNotFoundException, DatabaseUnavailableException {
         HttpClient httpClient = HttpClient.newBuilder().build();
         try {

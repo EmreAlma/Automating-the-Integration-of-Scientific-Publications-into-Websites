@@ -5,6 +5,12 @@ import jakarta.persistence.*;
 import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
+
+/**
+ * Entity class representing a publication.
+ * Maps to the 'PUBLICATIONS' table in the database.
+ * Contains details about individual publications, including links, authors, and metadata.
+ */
 @Entity
 @Table(name= "PUBLICATIONS")
 public class Publication {

@@ -9,8 +9,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/** This class responsible for fetching and saving publications for authors and
- *  interacting with the publication database.
+/**
+ * Service class responsible for fetching and saving publication data for authors.
+ * Interacts with external publication databases and the internal publication database.
  */
 @Service
 public class AuthorPublicationService {
@@ -32,8 +33,10 @@ public class AuthorPublicationService {
         this.authorRepository = authorRepository;
     }
 
-    /** This method retrieves author information, queries DBLP API, and then saves the fetched publications
-     * into the database.*/
+    /**
+     * Fetches publication data for all authors in the repository and saves it to the database.
+     * Handles exceptions such as AuthorNotFoundException and DatabaseUnavailableException.
+     */
     public void fetchAndSavePublicationsForAuthors() {
         List<Author> authors = authorRepository.findAll();
 

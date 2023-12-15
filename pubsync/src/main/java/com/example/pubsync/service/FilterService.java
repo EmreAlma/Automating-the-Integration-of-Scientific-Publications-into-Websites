@@ -10,12 +10,21 @@ import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service class for filtering publications based on specific criteria.
+ * Provides functionality to filter publications by year and to identify new publications.
+ */
 @Service
 public class FilterService {
 
     @Autowired
     private PublicationRepository publicationRepository;
 
+    /**
+     * Filters a list of publications to include only those that are not already in the database.
+     * @param databankPublications The list of publications to be filtered.
+     * @return A list of filtered publications.
+     */
     public List<Publication> filterAndSaveNewPublications(List<Publication> databankPublications){
         List<Publication> databasePublications = publicationRepository.findAll();
         List<Publication> filteredList = new ArrayList<>();
@@ -37,6 +46,12 @@ public class FilterService {
         return filteredList;
     }
 
+    /**
+     * Filters a list of publications to include only those that were published within the author's start and quit dates.
+     * @param publications The list of publications to be filtered.
+     * @param author The author whose start and quit dates are used for filtering.
+     * @return A list of filtered publications.
+     */
     public List<Publication> filterByYear(List<Publication> publications, Author author){
 
         List<Publication> filteredList = new ArrayList<>();
