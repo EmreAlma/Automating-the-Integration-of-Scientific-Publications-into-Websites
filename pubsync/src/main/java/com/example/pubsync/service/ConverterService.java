@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
 import java.time.Instant;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,8 +40,7 @@ public class ConverterService {
                 publication.setPublishAuthors(parsePublishAuthors(info));
                 publication.setExportable(true);
                 publication.setAddDate(Instant.now());
-                publication.setIsNew(publication.getAddDate().compareTo(ZonedDateTime.now().minusMinutes(3).toInstant())>=0);
-
+                publication.setIsNew(true);
 
                 publicationList.add(publication);
             }

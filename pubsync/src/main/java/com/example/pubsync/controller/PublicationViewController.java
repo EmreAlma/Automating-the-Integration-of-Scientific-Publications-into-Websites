@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,10 +24,15 @@ public class PublicationViewController {
 
     @GetMapping("/all")
     public String getAllPublications(Model model) {
-       List<Publication> publication = publicationRepository.findAll();
+       List<Publication> publications = publicationRepository.findAll();
+        publications.forEach(publication -> {
+            if (publication.getAddDate().isBefore(Instant.now().minus(30, ChronoUnit.MINUTES))) {
+                publication.setIsNew(false);
+            }
+        });
         List<Integer> publicationYears = publicationRepository.findDistinctPublicationYears();
         model.addAttribute("publicationYears", publicationYears);
-        model.addAttribute("publication", publication);
+        model.addAttribute("publication", publications);
         return "publications";
     }
     @PostMapping("/export/{id}")
