@@ -39,27 +39,31 @@ public class AuthorApiService {
     public Response getAuthorsPage(String param) throws AuthorNotFoundException, DatabaseUnavailableException {
         HttpClient httpClient = HttpClient.newBuilder().build();
         try {
-
             HttpRequest request = HttpRequest.newBuilder()
                     .GET()
                     .uri(URI.create("https://dblp.org/search/publ/api?q=author%3A" + param + "%3A&format=json&h=1000"))
                     .build();
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-            if (response.statusCode() != 200) {
-                throw new AuthorNotFoundException("Author not found or error in API response for: " + param);
+            switch (response.statusCode()) {
+                case 200 -> {
+                    Response parsedResponse = gson.fromJson(response.body(), Response.class);
+                    if (parsedResponse == null || parsedResponse.getResult() == null ||
+                            parsedResponse.getResult().getHits() == null || parsedResponse.getResult().getHits().getHit() == null) {
+                        throw new AuthorNotFoundException("No valid data found for author: " + param +
+                                "\r\nPlease make sure the author's name is spelled correctly.");
+                    }
+                    return parsedResponse;
+                }
+                case 400 -> throw new AuthorNotFoundException("Request contains incorrect syntax for: " + param);
+                case 404 -> throw new AuthorNotFoundException("Author not found: " + param);
+                case 500 ->
+                        throw new DatabaseUnavailableException("Database server is temporarily unavailable: " + response.body());
+                default -> throw new AuthorNotFoundException("Error in API response for: " + param);
             }
-
-            Response parsedResponse = gson.fromJson(response.body(), Response.class);
-            if (parsedResponse == null || parsedResponse.getResult() == null || parsedResponse.getResult().getHits().getHit() == null) {
-                throw new AuthorNotFoundException("No valid data found for author: " + param);
-            }
-
-            return parsedResponse;
 
         } catch (IOException | InterruptedException e) {
             throw new DatabaseUnavailableException("Database server is temporarily unavailable: " + e.getMessage());
         }
     }
-
 }
