@@ -84,7 +84,7 @@ public class AuthorController {
     public String generateMarkdown(@RequestParam(value = "filePath", required = false) String filePath) {
 
         if (filePath == null || filePath.isEmpty()) {
-            filePath = "/Users/emrealma/Documents/GitHub/Integration-of-Publications/pubsync/src/main/resources/_index.md";
+            filePath = "pubsync/src/main/resources/_index.md";
         }
         try {
             fileService.createMarkdownFile(filePath);
